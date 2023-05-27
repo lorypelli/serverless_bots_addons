@@ -1,0 +1,17 @@
+{
+  "name": "serverless_bots_addons",
+  "version": "3.4.1-20230527",
+  "description": "A package to improve serverless discord bots",
+  "main": "./output/index.js",
+  "types": "./output/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "author": "LoryPelli",
+  "license": "GPL-3.0",
+  "keywords": ["serverless-discord-bots", "discord-bots", "serverless", "discord-interactions"],
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}

@@ -1,0 +1,2 @@
+# serverless_bots_addons
+if you are building a serverless discord bot, consider using this package that has enums for application command types and application commands options types, handling various types of reply will also be improved and you can get options from commands easier than before.
