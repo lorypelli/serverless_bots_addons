@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followup = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = exports.updateReply = exports.reply = void 0;
+exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followup = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = exports.editReply = exports.reply = void 0;
 function reply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
@@ -29,7 +29,7 @@ function reply(interaction, options, token) {
     });
 }
 exports.reply = reply;
-function updateReply(interaction, options, token) {
+function editReply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/messages/@original`, {
             method: "PATCH",
@@ -47,7 +47,7 @@ function updateReply(interaction, options, token) {
         });
     });
 }
-exports.updateReply = updateReply;
+exports.editReply = editReply;
 function deferReply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {

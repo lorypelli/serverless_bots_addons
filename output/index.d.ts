@@ -2,7 +2,7 @@ export declare function reply(interaction: {
     id: String;
     token: String;
 }, options: InteractionOptions, token?: String): Promise<void>;
-export declare function updateReply(interaction: {
+export declare function editReply(interaction: {
     id: String;
     token: String;
 }, options: InteractionOptions, token?: String): Promise<void>;
