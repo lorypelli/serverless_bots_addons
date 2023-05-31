@@ -90,6 +90,26 @@ export function get(interaction: { data: Data }, value: String) {
         }
     }
 }
+export async function createSlashCommand(options: SlashCommand, token?: String) {
+    let id = (token || process.env.TOKEN)?.split(".")[0]!
+    id = atob(id)
+    await fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
+        method: "PUT",
+        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+            ...options
+        })
+    })
+    if (options.guild_id) {
+        await fetch(`https://discord.com/api/v10/applications/${id}/guild/${options.guild_id}/commands`, {
+            method: "PUT",
+            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+                ...options
+            })
+        })
+    }
+}
 export enum ApplicationCommandTypes {
     CHAT_INPUT = 1,
     USER = 2,
@@ -220,6 +240,36 @@ export interface User {
     flags?: Number,
     premium_type?: Number,
     public_flags?: Number
+}
+export interface SlashCommand {
+    type?: ApplicationCommandTypes.CHAT_INPUT | ApplicationCommandTypes.USER | ApplicationCommandTypes.MESSAGE,
+    guild_id?: String,
+    name: String,
+    name_localizations: String,
+    description: String,
+    description_localizations?: String,
+    options?: SlashCommandOptions[]
+}
+export interface SlashCommandOptions {
+    type: ApplicationCommandOptionTypes.SUB_COMMAND | ApplicationCommandOptionTypes.SUB_COMMAND_GROUP | ApplicationCommandOptionTypes.STRING | ApplicationCommandOptionTypes.INTEGER | ApplicationCommandOptionTypes.BOOLEAN | ApplicationCommandOptionTypes.USER | ApplicationCommandOptionTypes.CHANNEL | ApplicationCommandOptionTypes.MENTIONABLE | ApplicationCommandOptionTypes.NUMBER | ApplicationCommandOptionTypes.ATTACHMENT,
+    name: String,
+    name_localizations: String,
+    description: String,
+    description_localizations?: String,
+    required?: Boolean | false,
+    choices?: SlashCommandChoices[],
+    options?: SlashCommandOptions[],
+    channel_types?: ChannelTypes[],
+    min_value?: Number,
+    max_value?: Number,
+    min_length?: Number,
+    max_length?: Number,
+    autocomplete?: Boolean | false
+}
+export interface SlashCommandChoices {
+    name: String,
+    name_localizations?: String,
+    value: String | Number
 }
 interface EmbedFooter {
     text: String,
