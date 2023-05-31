@@ -31,7 +31,7 @@ function reply(interaction, options, token) {
 exports.reply = reply;
 function editReply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/messages/@original`, {
+        yield fetch(`https://discord.com/api/v10/webhooks/${interaction.id}/${interaction.token}/messages/@original`, {
             method: "PATCH",
             headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
             body: JSON.stringify({
