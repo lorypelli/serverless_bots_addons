@@ -162,19 +162,19 @@ export interface SlashCommand {
     type?: ApplicationCommandTypes.CHAT_INPUT | ApplicationCommandTypes.USER | ApplicationCommandTypes.MESSAGE;
     guild_id?: String;
     name: String;
-    name_localizations: String;
+    name_localizations?: Object;
     description: String;
-    description_localizations?: String;
+    description_localizations?: Object;
     options?: SlashCommandOptions[];
 }
 export interface SlashCommandOptions {
     type: ApplicationCommandOptionTypes.SUB_COMMAND | ApplicationCommandOptionTypes.SUB_COMMAND_GROUP | ApplicationCommandOptionTypes.STRING | ApplicationCommandOptionTypes.INTEGER | ApplicationCommandOptionTypes.BOOLEAN | ApplicationCommandOptionTypes.USER | ApplicationCommandOptionTypes.CHANNEL | ApplicationCommandOptionTypes.MENTIONABLE | ApplicationCommandOptionTypes.NUMBER | ApplicationCommandOptionTypes.ATTACHMENT;
     name: String;
-    name_localizations: String;
+    name_localizations?: Object;
     description: String;
-    description_localizations?: String;
+    description_localizations?: Object;
     required?: Boolean | false;
-    choices?: SlashCommandChoices[];
+    choices?: Choices[];
     options?: SlashCommandOptions[];
     channel_types?: ChannelTypes[];
     min_value?: Number;
@@ -182,11 +182,6 @@ export interface SlashCommandOptions {
     min_length?: Number;
     max_length?: Number;
     autocomplete?: Boolean | false;
-}
-export interface SlashCommandChoices {
-    name: String;
-    name_localizations?: String;
-    value: String | Number;
 }
 interface EmbedFooter {
     text: String;
@@ -235,7 +230,7 @@ interface Data {
 }
 interface Choices {
     name: String;
-    name_localizations?: String;
+    name_localizations?: Object;
     value: String | Number;
 }
 export {};
