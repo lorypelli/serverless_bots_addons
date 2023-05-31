@@ -122,7 +122,7 @@ function createSlashCommand(options, token) {
         id = atob(id);
         if (options.guild_id) {
             yield fetch(`https://discord.com/api/v10/applications/${id}/guilds/${options.guild_id}/commands`, {
-                method: "POST",
+                method: "PUT",
                 headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
                 body: JSON.stringify([
                     options
@@ -131,7 +131,7 @@ function createSlashCommand(options, token) {
         }
         else {
             yield fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
-                method: "POST",
+                method: "PUT",
                 headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
                 body: JSON.stringify([
                     options
