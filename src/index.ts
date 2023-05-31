@@ -94,8 +94,8 @@ export async function createSlashCommand(options: SlashCommand, token?: String) 
     let id = (token || process.env.TOKEN)?.split(".")[0]!
     id = atob(id)
     if (options.guild_id) {
-        await fetch(`https://discord.com/api/v10/applications/${id}/guild/${options.guild_id}/commands`, {
-            method: "PUT",
+        await fetch(`https://discord.com/api/v10/applications/${id}/guilds/${options.guild_id}/commands`, {
+            method: "POST",
             headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
             body: JSON.stringify([
                 options
@@ -104,7 +104,7 @@ export async function createSlashCommand(options: SlashCommand, token?: String) 
     }
     else {
         await fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
-            method: "PUT",
+            method: "POST",
             headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
             body: JSON.stringify([
                 options

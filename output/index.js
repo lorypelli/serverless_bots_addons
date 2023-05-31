@@ -120,16 +120,18 @@ function createSlashCommand(options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         let id = (_a = (token || process.env.TOKEN)) === null || _a === void 0 ? void 0 : _a.split(".")[0];
         id = atob(id);
-        yield fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
-            method: "PUT",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
-            body: JSON.stringify([
-                options
-            ])
-        });
         if (options.guild_id) {
-            yield fetch(`https://discord.com/api/v10/applications/${id}/guild/${options.guild_id}/commands`, {
-                method: "PUT",
+            yield fetch(`https://discord.com/api/v10/applications/${id}/guilds/${options.guild_id}/commands`, {
+                method: "POST",
+                headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+                body: JSON.stringify([
+                    options
+                ])
+            });
+        }
+        else {
+            yield fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
+                method: "POST",
                 headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
                 body: JSON.stringify([
                     options
