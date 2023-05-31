@@ -15,7 +15,9 @@ export async function reply(interaction: { id: String; token: String }, options:
     })
 }
 export async function editReply(interaction: { id: String; token: String }, options: InteractionOptions, token?: String) {
-    await fetch(`https://discord.com/api/v10/webhooks/${interaction.id}/${interaction.token}/messages/@original`, {
+    let id = (token || process.env.TOKEN)?.split(".")[0]!
+    id = atob(id)
+    await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/@original`, {
         method: "PATCH",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
         body: JSON.stringify({

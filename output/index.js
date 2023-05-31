@@ -30,8 +30,11 @@ function reply(interaction, options, token) {
 }
 exports.reply = reply;
 function editReply(interaction, options, token) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        yield fetch(`https://discord.com/api/v10/webhooks/${interaction.id}/${interaction.token}/messages/@original`, {
+        let id = (_a = (token || process.env.TOKEN)) === null || _a === void 0 ? void 0 : _a.split(".")[0];
+        id = atob(id);
+        yield fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/@original`, {
             method: "PATCH",
             headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
             body: JSON.stringify({
