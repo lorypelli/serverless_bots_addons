@@ -96,17 +96,17 @@ export async function createSlashCommand(options: SlashCommand, token?: String) 
     await fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
         method: "PUT",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-            ...options
-        })
+        body: JSON.stringify([
+            options
+        ])
     })
     if (options.guild_id) {
         await fetch(`https://discord.com/api/v10/applications/${id}/guild/${options.guild_id}/commands`, {
             method: "PUT",
             headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
-            body: JSON.stringify({
-                ...options
-            })
+            body: JSON.stringify([
+                options
+            ])
         })
     }
 }

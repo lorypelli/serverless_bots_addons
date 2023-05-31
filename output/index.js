@@ -123,13 +123,17 @@ function createSlashCommand(options, token) {
         yield fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
             method: "PUT",
             headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
-            body: JSON.stringify(Object.assign({}, options))
+            body: JSON.stringify([
+                options
+            ])
         });
         if (options.guild_id) {
             yield fetch(`https://discord.com/api/v10/applications/${id}/guild/${options.guild_id}/commands`, {
                 method: "PUT",
                 headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
-                body: JSON.stringify(Object.assign({}, options))
+                body: JSON.stringify([
+                    options
+                ])
             });
         }
     });
