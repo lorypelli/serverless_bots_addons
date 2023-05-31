@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.createSlashCommand = exports.get = exports.editFollowup = exports.followup = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = void 0;
+exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followup = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = void 0;
 function deferReply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
@@ -115,32 +115,6 @@ function get(interaction, value) {
     }
 }
 exports.get = get;
-function createSlashCommand(options, token) {
-    var _a;
-    return __awaiter(this, void 0, void 0, function* () {
-        let id = (_a = (token || process.env.TOKEN)) === null || _a === void 0 ? void 0 : _a.split(".")[0];
-        id = atob(id);
-        if (options.guild_id) {
-            yield fetch(`https://discord.com/api/v10/applications/${id}/guilds/${options.guild_id}/commands`, {
-                method: "POST",
-                headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
-                body: JSON.stringify([
-                    options
-                ])
-            });
-        }
-        else {
-            yield fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
-                method: "POST",
-                headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
-                body: JSON.stringify([
-                    options
-                ])
-            });
-        }
-    });
-}
-exports.createSlashCommand = createSlashCommand;
 var ApplicationCommandTypes;
 (function (ApplicationCommandTypes) {
     ApplicationCommandTypes[ApplicationCommandTypes["CHAT_INPUT"] = 1] = "CHAT_INPUT";
