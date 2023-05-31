@@ -1,3 +1,11 @@
+export declare function reply(interaction: {
+    id: String;
+    token: String;
+}, options: InteractionOptions, token?: String): Promise<void>;
+export declare function updateReply(interaction: {
+    id: String;
+    token: String;
+}, options: InteractionOptions, token?: String): Promise<void>;
 export declare function deferReply(interaction: {
     id: String;
     token: String;
@@ -66,6 +74,13 @@ export interface ModalOptions {
 export interface InteractionDeferredOptions {
     ephemeral: Boolean;
 }
+export interface InteractionOptions {
+    content?: String;
+    embeds?: Embeds[];
+    components?: ActionRow[];
+    attachments?: Attachment[];
+    ephemeral: Boolean;
+}
 export interface FollowupOptions {
     content?: String;
     embeds?: Embeds[];
@@ -86,6 +101,20 @@ export interface Embeds {
     thumbnail?: EmbedImage;
     author?: EmbedAuthor;
     fields?: EmbedFields[];
+}
+export interface Attachment {
+    id: String;
+    filename: String;
+    description?: String;
+    content_type?: String;
+    size: Number;
+    url: String;
+    proxy_url: String;
+    height: Number;
+    width: Number;
+    ephemeral?: Boolean;
+    duration_secs?: Number;
+    waveform?: String;
 }
 export interface ActionRow {
     type: 1;

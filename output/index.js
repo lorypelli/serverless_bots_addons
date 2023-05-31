@@ -9,7 +9,45 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followup = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = void 0;
+exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followup = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = exports.updateReply = exports.reply = void 0;
+function reply(interaction, options, token) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
+            method: "POST",
+            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+                type: 4,
+                data: {
+                    content: options.content,
+                    embeds: options.embeds,
+                    attachments: options.attachments,
+                    components: options.components,
+                    flags: options.ephemeral ? 64 : 0
+                }
+            })
+        });
+    });
+}
+exports.reply = reply;
+function updateReply(interaction, options, token) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/messages/@original`, {
+            method: "PATCH",
+            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            body: JSON.stringify({
+                type: 4,
+                data: {
+                    content: options.content,
+                    embeds: options.embeds,
+                    attachments: options.attachments,
+                    components: options.components,
+                    flags: options.ephemeral ? 64 : 0
+                }
+            })
+        });
+    });
+}
+exports.updateReply = updateReply;
 function deferReply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
