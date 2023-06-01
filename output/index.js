@@ -39,12 +39,7 @@ function editReply(interaction, options, token) {
             headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
             body: JSON.stringify({
                 type: 4,
-                data: {
-                    content: options.content,
-                    embeds: options.embeds,
-                    attachments: options.attachments,
-                    components: options.components
-                }
+                data: Object.assign({}, options)
             })
         });
     });
