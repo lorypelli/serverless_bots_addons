@@ -23,10 +23,7 @@ export async function editReply(interaction: { id: String; token: String }, opti
         body: JSON.stringify({
             type: 4,
             data: {
-                content: options.content,
-                embeds: options.embeds,
-                attachments: options.attachments,
-                components: options.components
+                ...options
             }
         })
     })
