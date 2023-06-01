@@ -14,7 +14,7 @@ export async function reply(interaction: { id: String; token: String }, options:
         })
     })
 }
-export async function editReply(interaction: { id: String; token: String }, options: InteractionOptions, token?: String) {
+export async function editReply(interaction: { id: String; token: String }, options: InteractionEditOptions, token?: String) {
     let id = (token || process.env.TOKEN)?.split(".")[0]!
     id = atob(id)
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/@original`, {
@@ -26,8 +26,7 @@ export async function editReply(interaction: { id: String; token: String }, opti
                 content: options.content,
                 embeds: options.embeds,
                 attachments: options.attachments,
-                components: options.components,
-                flags: options.ephemeral ? 64 : 0
+                components: options.components
             }
         })
     })
@@ -170,6 +169,12 @@ export interface InteractionOptions {
     components?: ActionRow[],
     attachments?: Attachment[]
     ephemeral: Boolean
+}
+export interface InteractionEditOptions {
+    content?: String,
+    embeds?: Embeds[]
+    components?: ActionRow[],
+    attachments?: Attachment[]
 }
 export interface FollowupOptions {
     content?: String,

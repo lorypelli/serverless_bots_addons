@@ -43,8 +43,7 @@ function editReply(interaction, options, token) {
                     content: options.content,
                     embeds: options.embeds,
                     attachments: options.attachments,
-                    components: options.components,
-                    flags: options.ephemeral ? 64 : 0
+                    components: options.components
                 }
             })
         });

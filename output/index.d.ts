@@ -5,7 +5,7 @@ export declare function reply(interaction: {
 export declare function editReply(interaction: {
     id: String;
     token: String;
-}, options: InteractionOptions, token?: String): Promise<void>;
+}, options: InteractionEditOptions, token?: String): Promise<void>;
 export declare function deferReply(interaction: {
     id: String;
     token: String;
@@ -80,6 +80,12 @@ export interface InteractionOptions {
     components?: ActionRow[];
     attachments?: Attachment[];
     ephemeral: Boolean;
+}
+export interface InteractionEditOptions {
+    content?: String;
+    embeds?: Embeds[];
+    components?: ActionRow[];
+    attachments?: Attachment[];
 }
 export interface FollowupOptions {
     content?: String;
