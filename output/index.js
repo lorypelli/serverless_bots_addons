@@ -155,7 +155,7 @@ var ApplicationCommandTypes;
     ApplicationCommandTypes[ApplicationCommandTypes["CHAT_INPUT"] = 1] = "CHAT_INPUT";
     ApplicationCommandTypes[ApplicationCommandTypes["USER"] = 2] = "USER";
     ApplicationCommandTypes[ApplicationCommandTypes["MESSAGE"] = 3] = "MESSAGE";
-})(ApplicationCommandTypes = exports.ApplicationCommandTypes || (exports.ApplicationCommandTypes = {}));
+})(ApplicationCommandTypes || (exports.ApplicationCommandTypes = ApplicationCommandTypes = {}));
 var ApplicationCommandOptionTypes;
 (function (ApplicationCommandOptionTypes) {
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["SUB_COMMAND"] = 1] = "SUB_COMMAND";
@@ -169,7 +169,7 @@ var ApplicationCommandOptionTypes;
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["MENTIONABLE"] = 9] = "MENTIONABLE";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["NUMBER"] = 10] = "NUMBER";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["ATTACHMENT"] = 11] = "ATTACHMENT";
-})(ApplicationCommandOptionTypes = exports.ApplicationCommandOptionTypes || (exports.ApplicationCommandOptionTypes = {}));
+})(ApplicationCommandOptionTypes || (exports.ApplicationCommandOptionTypes = ApplicationCommandOptionTypes = {}));
 var ChannelTypes;
 (function (ChannelTypes) {
     ChannelTypes[ChannelTypes["GUILD_TEXT"] = 0] = "GUILD_TEXT";
@@ -184,4 +184,5 @@ var ChannelTypes;
     ChannelTypes[ChannelTypes["GUILD_STAGE_VOICE"] = 13] = "GUILD_STAGE_VOICE";
     ChannelTypes[ChannelTypes["GUILD_DIRECTORY"] = 14] = "GUILD_DIRECTORY";
     ChannelTypes[ChannelTypes["GUILD_FORUM"] = 15] = "GUILD_FORUM";
-})(ChannelTypes = exports.ChannelTypes || (exports.ChannelTypes = {}));
+    ChannelTypes[ChannelTypes["GUILD_MEDIA"] = 16] = "GUILD_MEDIA";
+})(ChannelTypes || (exports.ChannelTypes = ChannelTypes = {}));
