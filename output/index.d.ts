@@ -32,8 +32,8 @@ export declare function editFollowup(interaction: {
     message: any;
 }, options: FollowupOptions, token?: String): Promise<void>;
 export declare function get(interaction: {
-    data: Data;
-}, value: String): String | undefined;
+    data: Data | any;
+}, value: String): any;
 export declare enum ApplicationCommandTypes {
     CHAT_INPUT = 1,
     USER = 2,
