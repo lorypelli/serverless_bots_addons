@@ -98,7 +98,7 @@ export async function editFollowup(interaction: { id: String; token: String; mes
         })
     })
 }
-export function get(interaction: { data: Data }, value: String) {
+export function get(interaction: { data: Data | any }, value: String) {
     let hasOptions = interaction.data.hasOwnProperty("options")
     if (hasOptions == true) {
         let options = interaction.data.options
