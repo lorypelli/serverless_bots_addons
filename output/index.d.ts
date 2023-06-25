@@ -1,38 +1,13 @@
-export declare function reply(interaction: {
-    id: String;
-    token: String;
-}, options: InteractionOptions, token?: String): Promise<void>;
-export declare function editReply(interaction: {
-    id: String;
-    token: String;
-}, options: InteractionEditOptions, token?: String): Promise<void>;
-export declare function deferReply(interaction: {
-    id: String;
-    token: String;
-}, options: InteractionDeferredOptions, token?: String): Promise<void>;
-export declare function updateDefer(interaction: {
-    id: String;
-    token: String;
-}, options: InteractionDeferredOptions, token?: String): Promise<void>;
-export declare function showModal(interaction: {
-    id: String;
-    token: String;
-}, options: ModalOptions, token?: String): Promise<void>;
-export declare function autocompleteResult(interaction: {
-    id: String;
-    token: String;
-}, options: AutocompleteOptions, token?: String): Promise<void>;
-export declare function followup(interaction: {
-    id: String;
-    token: String;
-}, options: FollowupOptions, token?: String): Promise<void>;
-export declare function editFollowup(interaction: {
-    id: String;
-    token: String;
-    message: any;
-}, options: FollowupOptions, token?: String): Promise<void>;
+export declare function reply(interaction: Interaction, options: InteractionOptions, token?: String): Promise<void>;
+export declare function editReply(interaction: Interaction, options: InteractionEditOptions, token?: String): Promise<void>;
+export declare function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: String): Promise<void>;
+export declare function updateDefer(interaction: Interaction, options: InteractionDeferredOptions, token?: String): Promise<void>;
+export declare function showModal(interaction: Interaction, options: ModalOptions, token?: String): Promise<void>;
+export declare function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: String): Promise<void>;
+export declare function followup(interaction: Interaction, options: FollowupOptions, token?: String): Promise<void>;
+export declare function editFollowup(interaction: Interaction, options: FollowupOptions, token?: String): Promise<void>;
 export declare function get(interaction: {
-    data: Data | any;
+    data: any;
 }, value: String): any;
 export declare enum ApplicationCommandTypes {
     CHAT_INPUT = 1,
@@ -67,6 +42,59 @@ export declare enum ChannelTypes {
     GUILD_FORUM = 15,
     GUILD_MEDIA = 16
 }
+export interface Interaction {
+    app_permissions: String;
+    application_id: String;
+    channel: Channel;
+    channel_id: String;
+    data?: {
+        guild_id: String;
+        id: String;
+        name: String;
+        options: Data;
+        components: Data;
+        type: 1 | Number;
+    };
+    entitlement_sku_ids: any[];
+    entitlements: any[];
+    guild: {
+        features: String[];
+        id: String;
+        locale: String;
+    };
+    guild_id?: String;
+    guild_locale?: String;
+    id: String;
+    locale?: String;
+    member: Member;
+    token: String;
+    type: Number;
+    version: Number;
+    message: Message;
+}
+export interface Message {
+    id: String;
+    channel_id: String;
+    author: User;
+    content: String;
+    timestamp: String;
+    edited_timestamp: String | null;
+    tts: Boolean;
+    mention_everyone: Boolean;
+    attachments: Attachments[];
+    embeds: Embeds[];
+    reactions?: {
+        count: Number;
+        me: Boolean;
+        emoji: Emoji;
+    };
+    pinned: Boolean;
+    flags?: Number;
+    interaction?: Interaction;
+    thread?: Channel;
+    components?: ButtonsComponent[] | SelectMenusComponent[] | TextInputsComponent[];
+    position?: Number;
+}
 export interface ModalOptions {
     title: String;
     custom_id: String;
@@ -79,14 +107,14 @@ export interface InteractionOptions {
     content?: String;
     embeds?: Embeds[];
     components?: ActionRow[];
-    attachments?: Attachment[];
+    attachments?: Attachments[];
     ephemeral: Boolean;
 }
 export interface InteractionEditOptions {
     content?: String;
     embeds?: Embeds[];
     components?: ActionRow[];
-    attachments?: Attachment[];
+    attachments?: Attachments[];
 }
 export interface FollowupOptions {
     content?: String;
@@ -94,22 +122,41 @@ export interface FollowupOptions {
     components?: ActionRow[];
 }
 export interface AutocompleteOptions {
-    choices: Choices[];
+    choices: {
+        name: String;
+        name_localizations?: Object | null;
+        value: String | Number;
+    }[];
 }
 export interface Embeds {
     title?: String;
     type?: String;
     description?: String;
     url?: String;
-    timestamp?: Date | Number;
+    timestamp?: String;
     color?: Number;
-    footer?: EmbedFooter;
-    image?: EmbedImage;
-    thumbnail?: EmbedImage;
-    author?: EmbedAuthor;
-    fields?: EmbedFields[];
+    footer?: {
+        text: String;
+        icon_url?: String;
+    };
+    image?: {
+        url: String;
+    };
+    thumbnail?: {
+        url: String;
+    };
+    author?: {
+        name: String;
+        url?: String;
+        icon_url?: String;
+    };
+    fields?: {
+        name: String;
+        value: String;
+        inline?: Boolean;
+    }[];
 }
-export interface Attachment {
+export interface Attachments {
     id: String;
     filename: String;
     description?: String;
@@ -117,8 +164,8 @@ export interface Attachment {
     size: Number;
     url: String;
     proxy_url: String;
-    height: Number;
-    width: Number;
+    height?: Number | null;
+    width?: Number | null;
     ephemeral?: Boolean;
     duration_secs?: Number;
     waveform?: String;
@@ -140,7 +187,11 @@ export interface ButtonsComponent extends BaseComponent {
 }
 export interface SelectMenusComponent extends BaseComponent {
     custom_id: String;
-    options?: SelectOptions[];
+    options?: {
+        name: String;
+        value: String;
+        inline?: Boolean;
+    };
     channel_types?: ChannelTypes[];
 }
 export interface TextInputsComponent extends BaseComponent {
@@ -154,8 +205,8 @@ export interface TextInputsComponent extends BaseComponent {
     placeholder?: String;
 }
 export interface Emoji {
-    id: String;
-    name: String;
+    id: String | null;
+    name: String | null;
     roles?: Roles[];
     user?: User;
     require_colons?: Boolean;
@@ -163,24 +214,62 @@ export interface Emoji {
     animated?: Boolean;
     avaible?: Boolean;
 }
+export interface Channel {
+    flags?: Number;
+    guild_id?: String;
+    id: String;
+    last_message_id?: String | null;
+    last_pin_timestamp?: String | null;
+    name?: String;
+    nsfw?: Boolean;
+    parent_id?: String | null;
+    permissions?: String;
+    position?: Number;
+    rate_limit_per_user?: Number;
+    topic?: String;
+    type?: ChannelTypes.GUILD_TEXT | Number;
+}
+export interface Member {
+    avatar?: String | null;
+    communication_disabled_until?: String | null;
+    deaf: Boolean;
+    flags: Number;
+    joined_at: String;
+    mute: Boolean;
+    nick?: String | null;
+    pending?: Boolean;
+    permissions?: String;
+    premium_since?: String | null;
+    roles: String[];
+    unusual_dm_activity_until: any | null;
+    user: User;
+}
 export interface Roles {
     id: String;
     name: String;
     color: Number;
     hoist: Boolean;
-    icon?: String;
-    unicode_emoji?: String;
+    icon?: String | null;
+    unicode_emoji?: String | null;
     position: Number;
     permissions: String;
     managed: Boolean;
     mentionable: Boolean;
-    tags?: Tags;
+    tags?: {
+        bot_id?: String;
+        integration_id?: String;
+        premium_subscriber?: null;
+        subscription_listing_id?: String;
+        available_for_purchase?: null;
+        guild_connections?: null;
+    };
 }
 export interface User {
     id: String;
     username: String;
     discriminator: String;
-    avatar: String;
+    avatar: String | null;
+    avatar_decoration: any | null;
     bot?: Boolean;
     system?: Boolean;
     mfa_enabled?: Boolean;
@@ -188,59 +277,23 @@ export interface User {
     accent_color?: Number;
     locale?: String;
     verified?: String;
-    email?: String;
+    email?: String | null;
     flags?: Number;
     premium_type?: Number;
     public_flags?: Number;
 }
-interface EmbedFooter {
-    text: String;
-    icon_url?: String;
-}
-interface EmbedImage {
-    url: String;
-}
-interface EmbedAuthor {
-    name: String;
-    url?: String;
-    icon_url?: String;
-}
-interface EmbedFields {
-    name: String;
-    value: String;
-    inline?: Boolean;
-}
-interface SelectOptions {
-    label: String;
-    value: String;
-    description?: String;
-    emoji: Emoji;
-}
-interface Tags {
-    bot_id?: String;
-    integration_id?: String;
-    premium_subscriber?: null;
-    subscription_listing_id?: String;
-    available_for_purchase?: null;
-    guild_connections?: null;
-}
 interface Data {
-    options: {
+    options?: {
         name: String;
         type: Number;
         value: String;
     }[];
-    components: {
+    components?: {
         components: {
             custom_id: String;
             type: Number;
             value: String;
         }[];
     }[];
-}
-interface Choices {
-    name: String;
-    name_localizations?: Object;
-    value: String | Number;
 }
 export {};
