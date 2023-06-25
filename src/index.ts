@@ -1,4 +1,4 @@
-export async function reply(interaction: Interaction, options: InteractionOptions, token?: String) {
+export async function reply(interaction: Interaction, options: InteractionOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
         method: "POST",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
@@ -14,7 +14,7 @@ export async function reply(interaction: Interaction, options: InteractionOption
         })
     })
 }
-export async function editReply(interaction: Interaction, options: InteractionEditOptions, token?: String) {
+export async function editReply(interaction: Interaction, options: InteractionEditOptions, token?: string) {
     let id = (token || process.env.TOKEN)?.split(".")[0]!
     id = atob(id)
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/@original`, {
@@ -28,7 +28,7 @@ export async function editReply(interaction: Interaction, options: InteractionEd
         })
     })
 }
-export async function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: String) {
+export async function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
         method: "POST",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
@@ -40,7 +40,7 @@ export async function deferReply(interaction: Interaction, options: InteractionD
         })
     })
 }
-export async function updateDefer(interaction: Interaction, options: InteractionDeferredOptions, token?: String) {
+export async function updateDefer(interaction: Interaction, options: InteractionDeferredOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
         method: "POST",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
@@ -52,7 +52,7 @@ export async function updateDefer(interaction: Interaction, options: Interaction
         })
     })
 }
-export async function showModal(interaction: Interaction, options: ModalOptions, token?: String) {
+export async function showModal(interaction: Interaction, options: ModalOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
         method: "POST",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
@@ -64,7 +64,7 @@ export async function showModal(interaction: Interaction, options: ModalOptions,
         })
     })
 }
-export async function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: String) {
+export async function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
         method: "POST",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
@@ -76,7 +76,7 @@ export async function autocompleteResult(interaction: Interaction, options: Auto
         })
     })
 }
-export async function followup(interaction: Interaction, options: FollowupOptions, token?: String) {
+export async function followup(interaction: Interaction, options: FollowupOptions, token?: string) {
     let id = (token || process.env.TOKEN)?.split(".")[0]!
     id = atob(id)
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}`, {
@@ -87,7 +87,7 @@ export async function followup(interaction: Interaction, options: FollowupOption
         })
     })
 }
-export async function editFollowup(interaction: Interaction, options: FollowupOptions, token?: String) {
+export async function editFollowup(interaction: Interaction, options: FollowupOptions, token?: string) {
     let id = (token || process.env.TOKEN)?.split(".")[0]!
     id = atob(id)
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/${interaction.message.id}`, {
@@ -98,7 +98,7 @@ export async function editFollowup(interaction: Interaction, options: FollowupOp
         })
     })
 }
-export function get(interaction: Interaction, value: String) {
+export function get(interaction: Interaction, value: string) {
     let hasOptions = interaction.data!.hasOwnProperty("options")
     if (hasOptions == true) {
         let options = interaction.data!.options
@@ -128,14 +128,14 @@ export enum ApplicationCommandTypes {
 export enum ApplicationCommandOptionTypes {
     SUB_COMMAND = 1,
     SUB_COMMAND_GROUP = 2,
-    STRING = 3,
+    string = 3,
     INTEGER = 4,
-    BOOLEAN = 5,
+    boolean = 5,
     USER = 6,
     CHANNEL = 7,
     ROLE = 8,
     MENTIONABLE = 9,
-    NUMBER = 10,
+    number = 10,
     ATTACHMENT = 11
 }
 export enum ChannelTypes {
@@ -154,266 +154,266 @@ export enum ChannelTypes {
     GUILD_MEDIA = 16
 }
 export interface Interaction {
-    app_permissions: String,
-    application_id: String,
+    app_permissions: string,
+    application_id: string,
     channel: Channel,
-    channel_id: String,
+    channel_id: string,
     data?: {
-        guild_id: String,
-        id: String,
-        name: String,
+        guild_id: string,
+        id: string,
+        name: string,
         options?: Data["options"],
         components?: Data["components"],
-        custom_id?: String,
-        component_type: Number,
+        custom_id?: string,
+        component_type: number,
         values: {
-            label: String,
-            value: String,
-            description?: String,
+            label: string,
+            value: string,
+            description?: string,
             emoji?: Emoji,
-            default?: Boolean
+            default?: boolean
         }
-        type: 1 | Number
+        type: 1 | number
     },
     entitlement_sku_ids: any[],
     entitlements: any[],
     guild: {
-        features: String[],
-        id: String,
-        locale: String
+        features: string[],
+        id: string,
+        locale: string
     },
-    guild_id?: String,
-    guild_locale?: String,
-    id: String,
-    locale?: String,
+    guild_id?: string,
+    guild_locale?: string,
+    id: string,
+    locale?: string,
     member?: Member,
     user?: User
-    token: String,
-    type: Number,
-    version: Number,
+    token: string,
+    type: number,
+    version: number,
     message: Message
 }
 export interface Message {
-    id: String,
-    channel_id: String,
+    id: string,
+    channel_id: string,
     author: User,
-    content: String,
-    timestamp: String,
-    edited_timestamp: String | null,
-    tts: Boolean,
-    mention_everyone: Boolean,
+    content: string,
+    timestamp: string,
+    edited_timestamp: string | null,
+    tts: boolean,
+    mention_everyone: boolean,
     attachments: Attachments[],
     embeds: Embeds[],
     reactions?: {
-        count: Number,
-        me: Boolean,
+        count: number,
+        me: boolean,
         emoji: Emoji
     },
-    pinned: Boolean,
-    flags?: Number,
+    pinned: boolean,
+    flags?: number,
     interaction?: Interaction,
     thread?: Channel,
     components?: ButtonsComponent[] | SelectMenusComponent[] | TextInputsComponent[],
-    position?: Number
+    position?: number
 }
 export interface ModalOptions {
-    title: String,
-    custom_id: String,
+    title: string,
+    custom_id: string,
     components: ActionRow[]
 }
 export interface InteractionDeferredOptions {
-    ephemeral: Boolean
+    ephemeral: boolean
 }
 export interface InteractionOptions {
-    content?: String,
+    content?: string,
     embeds?: Embeds[]
     components?: ActionRow[],
     attachments?: Attachments[]
-    ephemeral: Boolean
+    ephemeral: boolean
 }
 export interface InteractionEditOptions {
-    content?: String,
+    content?: string,
     embeds?: Embeds[]
     components?: ActionRow[],
     attachments?: Attachments[]
 }
 export interface FollowupOptions {
-    content?: String,
+    content?: string,
     embeds?: Embeds[],
     components?: ActionRow[]
 }
 export interface AutocompleteOptions {
     choices: {
-        name: String,
-        name_localizations?: Object | null,
-        value: String | Number
+        name: string,
+        name_localizations?: object | null,
+        value: string | number
     }[]
 }
 export interface Embeds {
-    title?: String,
-    type?: String,
-    description?: String,
-    url?: String,
-    timestamp?: String,
-    color?: Number,
+    title?: string,
+    type?: string,
+    description?: string,
+    url?: string,
+    timestamp?: string,
+    color?: number,
     footer?: {
-        text: String,
-        icon_url?: String
+        text: string,
+        icon_url?: string
     },
     image?: {
-        url: String
+        url: string
     },
     thumbnail?: {
-        url: String
+        url: string
     },
     author?: {
-        name: String,
-        url?: String,
-        icon_url?: String
+        name: string,
+        url?: string,
+        icon_url?: string
     },
     fields?: {
-        name: String,
-        value: String,
-        inline?: Boolean
+        name: string,
+        value: string,
+        inline?: boolean
     }[]
 }
 export interface Attachments {
-    id: String,
-    filename: String,
-    description?: String,
-    content_type?: String,
-    size: Number,
-    url: String,
-    proxy_url: String,
-    height?: Number | null,
-    width?: Number | null,
-    ephemeral?: Boolean,
-    duration_secs?: Number,
-    waveform?: String
+    id: string,
+    filename: string,
+    description?: string,
+    content_type?: string,
+    size: number,
+    url: string,
+    proxy_url: string,
+    height?: number | null,
+    width?: number | null,
+    ephemeral?: boolean,
+    duration_secs?: number,
+    waveform?: string
 }
 export interface ActionRow {
     type: 1,
     components: ButtonsComponent[] | SelectMenusComponent[] | TextInputsComponent[]
 }
 interface BaseComponent {
-    type: Number
+    type: number
 }
 export interface ButtonsComponent extends BaseComponent {
-    custom_id?: String,
-    style: Number,
-    label?: String,
+    custom_id?: string,
+    style: number,
+    label?: string,
     emoji?: Emoji,
-    url?: String,
-    disabled?: Boolean
+    url?: string,
+    disabled?: boolean
 }
 export interface SelectMenusComponent extends BaseComponent {
-    custom_id: String,
+    custom_id: string,
     options?: {
-        name: String,
-        value: String,
-        inline?: Boolean
+        name: string,
+        value: string,
+        inline?: boolean
     },
     channel_types?: ChannelTypes[]
 }
 export interface TextInputsComponent extends BaseComponent {
-    custom_id: String,
-    style: Number,
-    label: String,
-    min_length?: Number,
-    max_length?: Number,
-    required?: Boolean
-    value?: String,
-    placeholder?: String
+    custom_id: string,
+    style: number,
+    label: string,
+    min_length?: number,
+    max_length?: number,
+    required?: boolean
+    value?: string,
+    placeholder?: string
 }
 export interface Emoji {
-    id: String | null,
-    name: String | null,
+    id: string | null,
+    name: string | null,
     roles?: Roles[],
     user?: User,
-    require_colons?: Boolean,
-    managed?: Boolean,
-    animated?: Boolean,
-    avaible?: Boolean
+    require_colons?: boolean,
+    managed?: boolean,
+    animated?: boolean,
+    avaible?: boolean
 }
 export interface Channel {
-    flags?: Number,
-    guild_id?: String,
-    id: String,
-    last_message_id?: String | null,
-    last_pin_timestamp?: String | null,
-    name?: String,
-    nsfw?: Boolean,
-    parent_id?: String | null,
-    permissions?: String,
-    position?: Number,
-    rate_limit_per_user?: Number,
-    topic?: String,
-    type?: ChannelTypes.GUILD_TEXT | Number
+    flags?: number,
+    guild_id?: string,
+    id: string,
+    last_message_id?: string | null,
+    last_pin_timestamp?: string | null,
+    name?: string,
+    nsfw?: boolean,
+    parent_id?: string | null,
+    permissions?: string,
+    position?: number,
+    rate_limit_per_user?: number,
+    topic?: string,
+    type?: ChannelTypes.GUILD_TEXT | number
 }
 export interface Member {
-    avatar?: String | null,
-    communication_disabled_until?: String | null,
-    deaf: Boolean,
-    flags: Number,
-    joined_at: String,
-    mute: Boolean,
-    nick?: String | null,
-    pending?: Boolean,
-    permissions?: String,
-    premium_since?: String | null,
-    roles: String[],
+    avatar?: string | null,
+    communication_disabled_until?: string | null,
+    deaf: boolean,
+    flags: number,
+    joined_at: string,
+    mute: boolean,
+    nick?: string | null,
+    pending?: boolean,
+    permissions?: string,
+    premium_since?: string | null,
+    roles: string[],
     unusual_dm_activity_until: any | null
     user: User,
 }
 export interface Roles {
-    id: String,
-    name: String,
-    color: Number,
-    hoist: Boolean,
-    icon?: String | null,
-    unicode_emoji?: String | null,
-    position: Number,
-    permissions: String,
-    managed: Boolean,
-    mentionable: Boolean,
+    id: string,
+    name: string,
+    color: number,
+    hoist: boolean,
+    icon?: string | null,
+    unicode_emoji?: string | null,
+    position: number,
+    permissions: string,
+    managed: boolean,
+    mentionable: boolean,
     tags?: {
-        bot_id?: String,
-        integration_id?: String,
+        bot_id?: string,
+        integration_id?: string,
         premium_subscriber?: null,
-        subscription_listing_id?: String,
+        subscription_listing_id?: string,
         available_for_purchase?: null,
         guild_connections?: null
     }
 }
 export interface User {
-    id: String,
-    username: String,
-    discriminator: String,
-    avatar: String | null,
+    id: string,
+    username: string,
+    discriminator: string,
+    avatar: string | null,
     avatar_decoration: any | null
-    bot?: Boolean,
-    system?: Boolean,
-    mfa_enabled?: Boolean,
-    banner?: String,
-    accent_color?: Number,
-    locale?: String,
-    verified?: String,
-    email?: String | null,
-    flags?: Number,
-    premium_type?: Number,
-    public_flags?: Number
+    bot?: boolean,
+    system?: boolean,
+    mfa_enabled?: boolean,
+    banner?: string,
+    accent_color?: number,
+    locale?: string,
+    verified?: string,
+    email?: string | null,
+    flags?: number,
+    premium_type?: number,
+    public_flags?: number
 }
 interface Data {
     options?: {
-        name: String,
-        type: Number,
-        value: String
+        name: string,
+        type: number,
+        value: string
     }[],
     components?: {
         components: {
-            custom_id: String,
-            type: Number,
-            value: String
+            custom_id: string,
+            type: number,
+            value: string
         }[]
     }[]
 }
