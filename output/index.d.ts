@@ -6,9 +6,7 @@ export declare function showModal(interaction: Interaction, options: ModalOption
 export declare function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: String): Promise<void>;
 export declare function followup(interaction: Interaction, options: FollowupOptions, token?: String): Promise<void>;
 export declare function editFollowup(interaction: Interaction, options: FollowupOptions, token?: String): Promise<void>;
-export declare function get(interaction: {
-    data: any;
-}, value: String): any;
+export declare function get(interaction: Interaction, value: String): String | undefined;
 export declare enum ApplicationCommandTypes {
     CHAT_INPUT = 1,
     USER = 2,

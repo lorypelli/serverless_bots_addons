@@ -98,13 +98,13 @@ export async function editFollowup(interaction: Interaction, options: FollowupOp
         })
     })
 }
-export function get(interaction: { data: any }, value: String) {
+export function get(interaction: Interaction, value: String) {
     let hasOptions = interaction.data!.hasOwnProperty("options")
     if (hasOptions == true) {
         let options = interaction.data!.options
-        for (let i = 0; i < options.length; i++) {
-            if (interaction.data!.options[i].name == value) {
-                return interaction.data!.options[i].value
+        for (let i = 0; i < options!.length; i++) {
+            if (interaction.data!.options![i].name == value) {
+                return interaction.data!.options![i].value
             }
         }
     }
@@ -112,9 +112,9 @@ export function get(interaction: { data: any }, value: String) {
         let hasComponents = interaction.data!.hasOwnProperty("components")
         if (hasComponents == true) {
             let components = interaction.data!.components
-            for (let i = 0; i < components.length; i++) {
-                if (interaction.data!.components[i].components[0].custom_id == value) {
-                    return interaction.data!.components[i].components[0].value
+            for (let i = 0; i < components!.length; i++) {
+                if (interaction.data!.components![i].components[0].custom_id == value) {
+                    return interaction.data!.components![i].components[0].value
                 }
             }
         }
