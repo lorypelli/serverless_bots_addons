@@ -51,8 +51,8 @@ export interface Interaction {
         guild_id: String;
         id: String;
         name: String;
-        options: Data;
-        components: Data;
+        options: Data["options"];
+        components: Data["components"];
         type: 1 | Number;
     };
     entitlement_sku_ids: any[];
