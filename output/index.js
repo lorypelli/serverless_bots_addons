@@ -160,14 +160,14 @@ var ApplicationCommandOptionTypes;
 (function (ApplicationCommandOptionTypes) {
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["SUB_COMMAND"] = 1] = "SUB_COMMAND";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["SUB_COMMAND_GROUP"] = 2] = "SUB_COMMAND_GROUP";
-    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["string"] = 3] = "string";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["STRING"] = 3] = "STRING";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["INTEGER"] = 4] = "INTEGER";
-    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["boolean"] = 5] = "boolean";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["BOOLEAN"] = 5] = "BOOLEAN";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["USER"] = 6] = "USER";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["CHANNEL"] = 7] = "CHANNEL";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["ROLE"] = 8] = "ROLE";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["MENTIONABLE"] = 9] = "MENTIONABLE";
-    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["number"] = 10] = "number";
+    ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["NUMBER"] = 10] = "NUMBER";
     ApplicationCommandOptionTypes[ApplicationCommandOptionTypes["ATTACHMENT"] = 11] = "ATTACHMENT";
 })(ApplicationCommandOptionTypes || (exports.ApplicationCommandOptionTypes = ApplicationCommandOptionTypes = {}));
 var ChannelTypes;

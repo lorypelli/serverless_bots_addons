@@ -15,14 +15,14 @@ export declare enum ApplicationCommandTypes {
 export declare enum ApplicationCommandOptionTypes {
     SUB_COMMAND = 1,
     SUB_COMMAND_GROUP = 2,
-    string = 3,
+    STRING = 3,
     INTEGER = 4,
-    boolean = 5,
+    BOOLEAN = 5,
     USER = 6,
     CHANNEL = 7,
     ROLE = 8,
     MENTIONABLE = 9,
-    number = 10,
+    NUMBER = 10,
     ATTACHMENT = 11
 }
 export declare enum ChannelTypes {
