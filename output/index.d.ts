@@ -49,8 +49,17 @@ export interface Interaction {
         guild_id: String;
         id: String;
         name: String;
-        options: Data["options"];
-        components: Data["components"];
+        options?: Data["options"];
+        components?: Data["components"];
+        custom_id?: String;
+        component_type: Number;
+        values: {
+            label: String;
+            value: String;
+            description?: String;
+            emoji?: Emoji;
+            default?: Boolean;
+        };
         type: 1 | Number;
     };
     entitlement_sku_ids: any[];
