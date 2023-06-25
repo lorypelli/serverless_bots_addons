@@ -181,9 +181,9 @@ export interface ButtonsComponent extends BaseComponent {
     custom_id?: String;
     style: Number;
     label?: String;
-    emoji?: String;
+    emoji?: Emoji;
     url?: String;
-    disabled?: String;
+    disabled?: Boolean;
 }
 export interface SelectMenusComponent extends BaseComponent {
     custom_id: String;
