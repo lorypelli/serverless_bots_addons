@@ -64,7 +64,8 @@ export interface Interaction {
     guild_locale?: String;
     id: String;
     locale?: String;
-    member: Member;
+    member?: Member;
+    user?: User;
     token: String;
     type: Number;
     version: Number;
