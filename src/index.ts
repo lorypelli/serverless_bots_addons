@@ -155,20 +155,16 @@ export enum ChannelTypes {
     GUILD_MEDIA = 16
 }
 export interface SlashCommandsStructure {
-    id: string,
     type?: ApplicationCommandTypes,
-    application_id: string,
     guild_id?: string,
     name: string,
     name_localizations?: object | null,
     description: string,
     description_localizations?: object | null,
     options?: ApplicationCommandOptions[],
-    default_member_permissions: string | null,
     dm_permission?: boolean,
     default_permission?: boolean | null,
-    nsfw?: boolean,
-    version: string
+    nsfw?: boolean
 }
 export interface ApplicationCommandOptions {
     type: ApplicationCommandOptionTypes,
