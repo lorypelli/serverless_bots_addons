@@ -159,10 +159,14 @@ export interface FollowupOptions {
     components?: ActionRow[];
 }
 export interface Options {
+    name: string;
+    name_localizations?: object | null;
+    value: string | number;
+}
+export interface AutocompleteOptions {
     choices: {
         name: string;
-        name_localizations?: object | null;
-        value: string | number;
+        value: string;
     }[];
 }
 export interface Embeds {
