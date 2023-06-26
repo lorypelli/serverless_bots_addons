@@ -4,7 +4,7 @@ export declare function editReply(interaction: Interaction, options: Interaction
 export declare function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;
 export declare function updateDefer(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;
 export declare function showModal(interaction: Interaction, options: ModalOptions, token?: string): Promise<void>;
-export declare function autocompleteResult(interaction: Interaction, options: Options, token?: string): Promise<void>;
+export declare function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: string): Promise<void>;
 export declare function followup(interaction: Interaction, options: FollowupOptions, token?: string): Promise<void>;
 export declare function editFollowup(interaction: Interaction, options: FollowupOptions, token?: string): Promise<void>;
 export declare function get(interaction: Interaction, value: string): string | undefined;

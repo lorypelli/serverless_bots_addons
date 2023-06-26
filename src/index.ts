@@ -65,7 +65,7 @@ export async function showModal(interaction: Interaction, options: ModalOptions,
         })
     })
 }
-export async function autocompleteResult(interaction: Interaction, options: Options, token?: string) {
+export async function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
         method: "POST",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
