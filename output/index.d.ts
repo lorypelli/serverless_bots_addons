@@ -1,9 +1,10 @@
+import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionType } from "discord-interactions";
 export declare function reply(interaction: Interaction, options: InteractionOptions, token?: string): Promise<void>;
 export declare function editReply(interaction: Interaction, options: InteractionEditOptions, token?: string): Promise<void>;
 export declare function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;
 export declare function updateDefer(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;
 export declare function showModal(interaction: Interaction, options: ModalOptions, token?: string): Promise<void>;
-export declare function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: string): Promise<void>;
+export declare function autocompleteResult(interaction: Interaction, options: Options, token?: string): Promise<void>;
 export declare function followup(interaction: Interaction, options: FollowupOptions, token?: string): Promise<void>;
 export declare function editFollowup(interaction: Interaction, options: FollowupOptions, token?: string): Promise<void>;
 export declare function get(interaction: Interaction, value: string): string | undefined;
@@ -40,6 +41,38 @@ export declare enum ChannelTypes {
     GUILD_FORUM = 15,
     GUILD_MEDIA = 16
 }
+export interface SlashCommandsStructure {
+    id: string;
+    type?: ApplicationCommandTypes;
+    application_id: string;
+    guild_id?: string;
+    name: string;
+    name_localizations?: object | null;
+    description: string;
+    description_localizations?: object | null;
+    options?: ApplicationCommandOptions[];
+    default_member_permissions: string | null;
+    dm_permission?: boolean;
+    default_permission?: boolean | null;
+    nsfw?: boolean;
+    version: string;
+}
+export interface ApplicationCommandOptions {
+    type: ApplicationCommandOptionTypes;
+    name: string;
+    name_localizations?: object | null;
+    description: string;
+    description_localizations?: object | null;
+    required?: boolean;
+    choices?: Options[];
+    options?: ApplicationCommandOptions[];
+    channel_types?: ChannelTypes[];
+    min_value?: number;
+    max_value?: number;
+    min_length?: number;
+    max_length?: number;
+    autocomplete?: boolean;
+}
 export interface Interaction {
     app_permissions: string;
     application_id: string;
@@ -60,7 +93,7 @@ export interface Interaction {
             emoji?: Emoji;
             default?: boolean;
         };
-        type: 1 | number;
+        type: ApplicationCommandTypes;
     };
     entitlement_sku_ids: any[];
     entitlements: any[];
@@ -76,8 +109,8 @@ export interface Interaction {
     member?: Member;
     user?: User;
     token: string;
-    type: number;
-    version: number;
+    type: InteractionType;
+    version: 1;
     message: Message;
 }
 export interface Message {
@@ -129,7 +162,7 @@ export interface FollowupOptions {
     embeds?: Embeds[];
     components?: ActionRow[];
 }
-export interface AutocompleteOptions {
+export interface Options {
     choices: {
         name: string;
         name_localizations?: object | null;
@@ -179,15 +212,15 @@ export interface Attachments {
     waveform?: string;
 }
 export interface ActionRow {
-    type: 1;
+    type: MessageComponentTypes.ACTION_ROW;
     components: ButtonsComponent[] | SelectMenusComponent[] | TextInputsComponent[];
 }
 interface BaseComponent {
-    type: number;
+    type: MessageComponentTypes;
 }
 export interface ButtonsComponent extends BaseComponent {
     custom_id?: string;
-    style: number;
+    style: ButtonStyleTypes;
     label?: string;
     emoji?: Emoji;
     url?: string;
@@ -204,7 +237,7 @@ export interface SelectMenusComponent extends BaseComponent {
 }
 export interface TextInputsComponent extends BaseComponent {
     custom_id: string;
-    style: number;
+    style: TextStyleTypes;
     label: string;
     min_length?: number;
     max_length?: number;
@@ -235,7 +268,7 @@ export interface Channel {
     position?: number;
     rate_limit_per_user?: number;
     topic?: string;
-    type?: ChannelTypes.GUILD_TEXT | number;
+    type?: ChannelTypes;
 }
 export interface Member {
     avatar?: string | null;
@@ -287,8 +320,14 @@ export interface User {
     verified?: string;
     email?: string | null;
     flags?: number;
-    premium_type?: number;
+    premium_type?: PremiumType;
     public_flags?: number;
+}
+interface PremiumType {
+    NONE: 0;
+    NITRO_CLASSIC: 1;
+    NITRO: 2;
+    NITRO_BASIC: 3;
 }
 interface Data {
     options?: {
