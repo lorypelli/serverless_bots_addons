@@ -16,7 +16,7 @@ export async function reply(interaction: Interaction, options: InteractionOption
     })
 }
 export async function editReply(interaction: Interaction, options: InteractionEditOptions, token?: string) {
-    let id = (token || process.env.TOKEN)?.split(".")[0]!
+    let id = (token || process.env.TOKEN)!.split(".")[0]
     id = atob(id)
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/@original`, {
         method: "PATCH",
@@ -41,15 +41,12 @@ export async function deferReply(interaction: Interaction, options: InteractionD
         })
     })
 }
-export async function updateDefer(interaction: Interaction, options: InteractionDeferredOptions, token?: string) {
+export async function updateDefer(interaction: Interaction, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
         method: "POST",
         headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-            type: 6,
-            data: {
-                flags: options.ephemeral ? 64 : 0
-            }
+            type: 6
         })
     })
 }
@@ -77,8 +74,8 @@ export async function autocompleteResult(interaction: Interaction, options: Auto
         })
     })
 }
-export async function followup(interaction: Interaction, options: FollowupOptions, token?: string) {
-    let id = (token || process.env.TOKEN)?.split(".")[0]!
+export async function followUp(interaction: Interaction, options: FollowupOptions, token?: string) {
+    let id = (token || process.env.TOKEN)!.split(".")[0]
     id = atob(id)
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}`, {
         method: "POST",
@@ -89,7 +86,7 @@ export async function followup(interaction: Interaction, options: FollowupOption
     })
 }
 export async function editFollowup(interaction: Interaction, options: FollowupOptions, token?: string) {
-    let id = (token || process.env.TOKEN)?.split(".")[0]!
+    let id = (token || process.env.TOKEN)!.split(".")[0]
     id = atob(id)
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/${interaction.message.id}`, {
         method: "PATCH",
@@ -158,9 +155,9 @@ export interface SlashCommandsStructure {
     type?: ApplicationCommandTypes,
     guild_id?: string,
     name: string,
-    name_localizations?: object | null,
+    name_localizations?: LocalizationObject | null,
     description: string,
-    description_localizations?: object | null,
+    description_localizations?: LocalizationObject | null,
     options?: ApplicationCommandOptions[],
     dm_permission?: boolean,
     default_permission?: boolean | null,
@@ -169,9 +166,9 @@ export interface SlashCommandsStructure {
 export interface ApplicationCommandOptions {
     type: ApplicationCommandOptionTypes,
     name: string,
-    name_localizations?: object | null,
+    name_localizations?: LocalizationObject | null,
     description: string,
-    description_localizations?: object | null,
+    description_localizations?: LocalizationObject | null,
     required?: boolean,
     choices?: Options[],
     options?: ApplicationCommandOptions[],
@@ -181,6 +178,39 @@ export interface ApplicationCommandOptions {
     min_length?: number
     max_length?: number,
     autocomplete?: boolean
+}
+export interface LocalizationObject {
+    "id"?: string,
+    "da"?: string,
+    "de"?: string,
+    "en-GB"?: string,
+    "en-US"?: string,
+    "es-ES"?: string,
+    "fr"?: string,
+    "hr"?: string,
+    "it"?: string,
+    "lt"?: string
+    "hu"?: string,
+    "nl"?: string,
+    "no"?: string,
+    "pl"?: string,
+    "pt-BR"?: string,
+    "ro"?: string,
+    "fi"?: string,
+    "sv-SE"?: string,
+    "vi"?: string,
+    "tr"?: string,
+    "cs"?: string,
+    "el"?: string,
+    "bg"?: string,
+    "ru"?: string,
+    "uk"?: string,
+    "hi"?: string,
+    "th"?: string,
+    "zh-CN"?: string,
+    "ja"?: string,
+    "zh-TW"?: string,
+    "ko"?: string
 }
 export interface Interaction {
     app_permissions: string,

@@ -2,10 +2,10 @@ import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionTyp
 export declare function reply(interaction: Interaction, options: InteractionOptions, token?: string): Promise<void>;
 export declare function editReply(interaction: Interaction, options: InteractionEditOptions, token?: string): Promise<void>;
 export declare function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;
-export declare function updateDefer(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;
+export declare function updateDefer(interaction: Interaction, token?: string): Promise<void>;
 export declare function showModal(interaction: Interaction, options: ModalOptions, token?: string): Promise<void>;
 export declare function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: string): Promise<void>;
-export declare function followup(interaction: Interaction, options: FollowupOptions, token?: string): Promise<void>;
+export declare function followUp(interaction: Interaction, options: FollowupOptions, token?: string): Promise<void>;
 export declare function editFollowup(interaction: Interaction, options: FollowupOptions, token?: string): Promise<void>;
 export declare function get(interaction: Interaction, value: string): string | undefined;
 export declare enum ApplicationCommandTypes {
@@ -45,9 +45,9 @@ export interface SlashCommandsStructure {
     type?: ApplicationCommandTypes;
     guild_id?: string;
     name: string;
-    name_localizations?: object | null;
+    name_localizations?: LocalizationObject | null;
     description: string;
-    description_localizations?: object | null;
+    description_localizations?: LocalizationObject | null;
     options?: ApplicationCommandOptions[];
     dm_permission?: boolean;
     default_permission?: boolean | null;
@@ -56,9 +56,9 @@ export interface SlashCommandsStructure {
 export interface ApplicationCommandOptions {
     type: ApplicationCommandOptionTypes;
     name: string;
-    name_localizations?: object | null;
+    name_localizations?: LocalizationObject | null;
     description: string;
-    description_localizations?: object | null;
+    description_localizations?: LocalizationObject | null;
     required?: boolean;
     choices?: Options[];
     options?: ApplicationCommandOptions[];
@@ -68,6 +68,39 @@ export interface ApplicationCommandOptions {
     min_length?: number;
     max_length?: number;
     autocomplete?: boolean;
+}
+export interface LocalizationObject {
+    "id"?: string;
+    "da"?: string;
+    "de"?: string;
+    "en-GB"?: string;
+    "en-US"?: string;
+    "es-ES"?: string;
+    "fr"?: string;
+    "hr"?: string;
+    "it"?: string;
+    "lt"?: string;
+    "hu"?: string;
+    "nl"?: string;
+    "no"?: string;
+    "pl"?: string;
+    "pt-BR"?: string;
+    "ro"?: string;
+    "fi"?: string;
+    "sv-SE"?: string;
+    "vi"?: string;
+    "tr"?: string;
+    "cs"?: string;
+    "el"?: string;
+    "bg"?: string;
+    "ru"?: string;
+    "uk"?: string;
+    "hi"?: string;
+    "th"?: string;
+    "zh-CN"?: string;
+    "ja"?: string;
+    "zh-TW"?: string;
+    "ko"?: string;
 }
 export interface Interaction {
     app_permissions: string;

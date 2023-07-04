@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followup = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = exports.editReply = exports.reply = void 0;
+exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followUp = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = exports.editReply = exports.reply = void 0;
 function reply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
@@ -30,9 +30,8 @@ function reply(interaction, options, token) {
 }
 exports.reply = reply;
 function editReply(interaction, options, token) {
-    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        let id = (_a = (token || process.env.TOKEN)) === null || _a === void 0 ? void 0 : _a.split(".")[0];
+        let id = (token || process.env.TOKEN).split(".")[0];
         id = atob(id);
         yield fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/@original`, {
             method: "PATCH",
@@ -60,16 +59,13 @@ function deferReply(interaction, options, token) {
     });
 }
 exports.deferReply = deferReply;
-function updateDefer(interaction, options, token) {
+function updateDefer(interaction, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
             method: "POST",
             headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
             body: JSON.stringify({
-                type: 6,
-                data: {
-                    flags: options.ephemeral ? 64 : 0
-                }
+                type: 6
             })
         });
     });
@@ -101,10 +97,9 @@ function autocompleteResult(interaction, options, token) {
     });
 }
 exports.autocompleteResult = autocompleteResult;
-function followup(interaction, options, token) {
-    var _a;
+function followUp(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
-        let id = (_a = (token || process.env.TOKEN)) === null || _a === void 0 ? void 0 : _a.split(".")[0];
+        let id = (token || process.env.TOKEN).split(".")[0];
         id = atob(id);
         yield fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}`, {
             method: "POST",
@@ -113,11 +108,10 @@ function followup(interaction, options, token) {
         });
     });
 }
-exports.followup = followup;
+exports.followUp = followUp;
 function editFollowup(interaction, options, token) {
-    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        let id = (_a = (token || process.env.TOKEN)) === null || _a === void 0 ? void 0 : _a.split(".")[0];
+        let id = (token || process.env.TOKEN).split(".")[0];
         id = atob(id);
         yield fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/${interaction.message.id}`, {
             method: "PATCH",
