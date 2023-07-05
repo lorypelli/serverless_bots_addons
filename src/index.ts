@@ -394,9 +394,11 @@ export interface ButtonsComponent extends BaseComponent {
 export interface SelectMenusComponent extends BaseComponent {
     custom_id: string,
     options?: {
-        name: string,
+        label: string,
         value: string,
-        inline?: boolean
+        description: string,
+        emoji?: Emoji,
+        default?: boolean
     }[],
     channel_types?: ChannelTypes[],
     placeholder?: string,
