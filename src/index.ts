@@ -398,7 +398,11 @@ export interface SelectMenusComponent extends BaseComponent {
         value: string,
         inline?: boolean
     },
-    channel_types?: ChannelTypes[]
+    channel_types?: ChannelTypes[],
+    placeholder?: string,
+    min_values?: string,
+    max_values?: string,
+    disabled: boolean
 }
 export interface TextInputsComponent extends BaseComponent {
     custom_id: string,
