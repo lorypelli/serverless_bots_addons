@@ -202,7 +202,7 @@ export interface Message {
 export interface ModalOptions {
     title: string;
     custom_id: string;
-    components: ActionRow[];
+    components: ActionRow<ButtonsComponent | SelectMenusComponent | TextInputsComponent>[];
 }
 export interface InteractionDeferredOptions {
     ephemeral: boolean;
@@ -210,20 +210,20 @@ export interface InteractionDeferredOptions {
 export interface InteractionOptions {
     content?: string;
     embeds?: Embeds[];
-    components?: ActionRow[];
+    components?: ActionRow<ButtonsComponent | SelectMenusComponent | TextInputsComponent>[];
     attachments?: Attachments[];
     ephemeral: boolean;
 }
 export interface InteractionEditOptions {
     content?: string;
     embeds?: Embeds[];
-    components?: ActionRow[];
+    components?: ActionRow<ButtonsComponent | SelectMenusComponent | TextInputsComponent>[];
     attachments?: Attachments[];
 }
 export interface FollowupOptions {
     content?: string;
     embeds?: Embeds[];
-    components?: ActionRow[];
+    components?: ActionRow<ButtonsComponent | SelectMenusComponent | TextInputsComponent>[];
 }
 export interface Options {
     name: string;
@@ -278,9 +278,10 @@ export interface Attachments {
     duration_secs?: number;
     waveform?: string;
 }
-export interface ActionRow {
+type ComponentTypes = ButtonsComponent | SelectMenusComponent | TextInputsComponent;
+export interface ActionRow<T extends ComponentTypes> {
     type: MessageComponentTypes.ACTION_ROW;
-    components: ButtonsComponent[] | SelectMenusComponent[] | TextInputsComponent[];
+    components: T[];
 }
 interface BaseComponent {
     type: MessageComponentTypes;
