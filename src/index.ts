@@ -221,6 +221,8 @@ export interface Interaction {
         guild_id: string,
         id: string,
         name: string,
+        resolved?: Resolved,
+        target_id?: string
         options?: Data["options"],
         components?: Data["components"],
         custom_id?: string,
@@ -251,6 +253,26 @@ export interface Interaction {
     type: InteractionType,
     version: 1,
     message: Message
+}
+interface Resolved {
+    messages?: {
+        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Message
+    },
+    users?: {
+        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: User
+    },
+    members?: {
+        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Member
+    },
+    roles?: {
+        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Roles
+    },
+    channels?: {
+        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Channel
+    },
+    attachments?: {
+        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Attachments
+    }
 }
 export interface Message {
     id: string,
