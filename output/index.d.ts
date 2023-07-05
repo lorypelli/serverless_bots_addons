@@ -298,7 +298,7 @@ export interface SelectMenusComponent extends BaseComponent {
     options?: {
         label: string;
         value: string;
-        description: string;
+        description?: string;
         emoji?: Emoji;
         default?: boolean;
     }[];
