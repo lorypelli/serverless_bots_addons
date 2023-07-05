@@ -397,7 +397,7 @@ export interface SelectMenusComponent extends BaseComponent {
         name: string,
         value: string,
         inline?: boolean
-    },
+    }[],
     channel_types?: ChannelTypes[],
     placeholder?: string,
     min_values?: string,
