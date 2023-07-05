@@ -402,7 +402,7 @@ export interface SelectMenusComponent extends BaseComponent {
     placeholder?: string,
     min_values?: string,
     max_values?: string,
-    disabled: boolean
+    disabled?: boolean
 }
 export interface TextInputsComponent extends BaseComponent {
     custom_id: string,
