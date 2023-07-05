@@ -376,7 +376,7 @@ export interface Attachments {
     duration_secs?: number,
     waveform?: string
 }
-type ComponentTypes = ButtonsComponent | SelectMenusComponent | TextInputsComponent;
+type ComponentTypes = ButtonsComponent | SelectMenusComponent | TextInputsComponent
 export interface ActionRow<T extends ComponentTypes> {
     type: MessageComponentTypes.ACTION_ROW,
     components: T[]
