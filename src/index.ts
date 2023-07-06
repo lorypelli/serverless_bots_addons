@@ -227,9 +227,9 @@ export interface Interaction {
         components?: Data["components"],
         custom_id?: string,
         component_type: number,
-        values: {
+        values: [
             label: string
-        }[]
+        ]
         type: ApplicationCommandTypes
     },
     entitlement_sku_ids: any[],

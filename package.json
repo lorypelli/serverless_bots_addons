@@ -1,6 +1,6 @@
 {
   "name": "serverless_bots_addons",
-  "version": "5.3.1-20230706",
+  "version": "5.3.2-20230706",
   "description": "A package to improve serverless discord bots",
   "main": "./output/index.js",
   "types": "./output/index.d.ts",
