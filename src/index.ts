@@ -228,12 +228,8 @@ export interface Interaction {
         custom_id?: string,
         component_type: number,
         values: {
-            label: string,
-            value: string,
-            description?: string,
-            emoji?: Emoji,
-            default?: boolean
-        }
+            label: string
+        }[]
         type: ApplicationCommandTypes
     },
     entitlement_sku_ids: any[],
@@ -300,7 +296,7 @@ export interface Message {
 export interface ModalOptions {
     title: string,
     custom_id: string,
-    components: ActionRow<ButtonsComponent | SelectMenusComponent | TextInputsComponent>[]
+    components: ActionRow[]
 }
 export interface InteractionDeferredOptions {
     ephemeral: boolean
@@ -308,20 +304,20 @@ export interface InteractionDeferredOptions {
 export interface InteractionOptions {
     content?: string,
     embeds?: Embeds[]
-    components?: ActionRow<ButtonsComponent | SelectMenusComponent | TextInputsComponent>[],
+    components?: ActionRow[],
     attachments?: Attachments[]
     ephemeral: boolean
 }
 export interface InteractionEditOptions {
     content?: string,
     embeds?: Embeds[]
-    components?: ActionRow<ButtonsComponent | SelectMenusComponent | TextInputsComponent>[],
+    components?: ActionRow[],
     attachments?: Attachments[]
 }
 export interface FollowupOptions {
     content?: string,
     embeds?: Embeds[],
-    components?: ActionRow<ButtonsComponent | SelectMenusComponent | TextInputsComponent>[]
+    components?: ActionRow[]
 }
 export interface Options {
     name: string,
@@ -376,10 +372,9 @@ export interface Attachments {
     duration_secs?: number,
     waveform?: string
 }
-type ComponentTypes = ButtonsComponent | SelectMenusComponent | TextInputsComponent
-export interface ActionRow<T extends ComponentTypes> {
-    type: MessageComponentTypes.ACTION_ROW,
-    components: T[]
+export interface ActionRow {
+    type: MessageComponentTypes.ACTION_ROW
+    components: ButtonsComponent[] | SelectMenusComponent[] | TextInputsComponent[]
 }
 interface BaseComponent {
     type: MessageComponentTypes
