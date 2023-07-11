@@ -1,8 +1,10 @@
-import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionType } from "discord-interactions"
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionType } from 'discord-interactions';
 export async function reply(interaction: Interaction, options: InteractionOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-        method: "POST",
-        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
             type: 4,
             data: {
@@ -13,106 +15,106 @@ export async function reply(interaction: Interaction, options: InteractionOption
                 flags: options.ephemeral ? 64 : 0
             }
         })
-    })
+    });
 }
 export async function editReply(interaction: Interaction, options: InteractionEditOptions, token?: string) {
-    let id = (token || process.env.TOKEN)!.split(".")[0]
-    id = atob(id)
+    let id = (token || process.env.TOKEN)!.split('.')[0];
+    id = atob(id);
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/@original`, {
-        method: "PATCH",
-        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        method: 'PATCH',
+        headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
             type: 4,
             data: {
                 ...options
             }
         })
-    })
+    });
 }
 export async function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-        method: "POST",
-        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
             type: 5,
             data: {
                 flags: options.ephemeral ? 64 : 0
             }
         })
-    })
+    });
 }
 export async function updateDefer(interaction: Interaction, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-        method: "POST",
-        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
             type: 6
         })
-    })
+    });
 }
 export async function showModal(interaction: Interaction, options: ModalOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-        method: "POST",
-        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
             type: 9,
             data: {
                 ...options
             }
         })
-    })
+    });
 }
 export async function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-        method: "POST",
-        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
             type: 8,
             data: {
                 ...options
             }
         })
-    })
+    });
 }
 export async function followUp(interaction: Interaction, options: FollowupOptions, token?: string) {
-    let id = (token || process.env.TOKEN)!.split(".")[0]
-    id = atob(id)
+    let id = (token || process.env.TOKEN)!.split('.')[0];
+    id = atob(id);
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}`, {
-        method: "POST",
-        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
             ...options
         })
-    })
+    });
 }
 export async function editFollowup(interaction: Interaction, options: FollowupOptions, token?: string) {
-    let id = (token || process.env.TOKEN)!.split(".")[0]
-    id = atob(id)
+    let id = (token || process.env.TOKEN)!.split('.')[0];
+    id = atob(id);
     await fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/${interaction.message.id}`, {
-        method: "PATCH",
-        headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+        method: 'PATCH',
+        headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
             ...options
         })
-    })
+    });
 }
 export function get(interaction: Interaction, value: string) {
-    let hasOptions = interaction.data!.hasOwnProperty("options")
+    const hasOptions = interaction.data!.hasOwnProperty('options');
     if (hasOptions == true) {
-        let options = interaction.data!.options
+        const options = interaction.data!.options;
         for (let i = 0; i < options!.length; i++) {
             if (interaction.data!.options![i].name == value) {
-                return interaction.data!.options![i].value
+                return interaction.data!.options![i].value;
             }
         }
     }
     else {
-        let hasComponents = interaction.data!.hasOwnProperty("components")
+        const hasComponents = interaction.data!.hasOwnProperty('components');
         if (hasComponents == true) {
-            let components = interaction.data!.components
+            const components = interaction.data!.components;
             for (let i = 0; i < components!.length; i++) {
                 if (interaction.data!.components![i].components[0].custom_id == value) {
-                    return interaction.data!.components![i].components[0].value
+                    return interaction.data!.components![i].components[0].value;
                 }
             }
         }
@@ -180,37 +182,37 @@ export interface ApplicationCommandOptions {
     autocomplete?: boolean
 }
 export interface LocalizationObject {
-    "id"?: string,
-    "da"?: string,
-    "de"?: string,
-    "en-GB"?: string,
-    "en-US"?: string,
-    "es-ES"?: string,
-    "fr"?: string,
-    "hr"?: string,
-    "it"?: string,
-    "lt"?: string
-    "hu"?: string,
-    "nl"?: string,
-    "no"?: string,
-    "pl"?: string,
-    "pt-BR"?: string,
-    "ro"?: string,
-    "fi"?: string,
-    "sv-SE"?: string,
-    "vi"?: string,
-    "tr"?: string,
-    "cs"?: string,
-    "el"?: string,
-    "bg"?: string,
-    "ru"?: string,
-    "uk"?: string,
-    "hi"?: string,
-    "th"?: string,
-    "zh-CN"?: string,
-    "ja"?: string,
-    "zh-TW"?: string,
-    "ko"?: string
+    'id'?: string,
+    'da'?: string,
+    'de'?: string,
+    'en-GB'?: string,
+    'en-US'?: string,
+    'es-ES'?: string,
+    'fr'?: string,
+    'hr'?: string,
+    'it'?: string,
+    'lt'?: string
+    'hu'?: string,
+    'nl'?: string,
+    'no'?: string,
+    'pl'?: string,
+    'pt-BR'?: string,
+    'ro'?: string,
+    'fi'?: string,
+    'sv-SE'?: string,
+    'vi'?: string,
+    'tr'?: string,
+    'cs'?: string,
+    'el'?: string,
+    'bg'?: string,
+    'ru'?: string,
+    'uk'?: string,
+    'hi'?: string,
+    'th'?: string,
+    'zh-CN'?: string,
+    'ja'?: string,
+    'zh-TW'?: string,
+    'ko'?: string
 }
 export interface Interaction {
     app_permissions: string,
@@ -223,8 +225,8 @@ export interface Interaction {
         name: string,
         resolved?: Resolved,
         target_id?: string
-        options?: Data["options"],
-        components?: Data["components"],
+        options?: Data['options'],
+        components?: Data['components'],
         custom_id?: string,
         component_type: number,
         values: [
@@ -252,22 +254,22 @@ export interface Interaction {
 }
 interface Resolved {
     messages?: {
-        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Message
+        [T in Interaction['data'] extends { target_id: string } ? Interaction['data']['target_id'] : string]: Message
     },
     users?: {
-        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: User
+        [T in Interaction['data'] extends { target_id: string } ? Interaction['data']['target_id'] : string]: User
     },
     members?: {
-        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Member
+        [T in Interaction['data'] extends { target_id: string } ? Interaction['data']['target_id'] : string]: Member
     },
     roles?: {
-        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Roles
+        [T in Interaction['data'] extends { target_id: string } ? Interaction['data']['target_id'] : string]: Roles
     },
     channels?: {
-        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Channel
+        [T in Interaction['data'] extends { target_id: string } ? Interaction['data']['target_id'] : string]: Channel
     },
     attachments?: {
-        [T in Interaction["data"] extends { target_id: string } ? Interaction["data"]["target_id"] : string]: Attachments
+        [T in Interaction['data'] extends { target_id: string } ? Interaction['data']['target_id'] : string]: Attachments
     }
 }
 export interface Message {

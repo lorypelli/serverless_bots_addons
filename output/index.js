@@ -13,8 +13,8 @@ exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.Applicati
 function reply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-            method: "POST",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 type: 4,
                 data: {
@@ -31,11 +31,11 @@ function reply(interaction, options, token) {
 exports.reply = reply;
 function editReply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
-        let id = (token || process.env.TOKEN).split(".")[0];
+        let id = (token || process.env.TOKEN).split('.')[0];
         id = atob(id);
         yield fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/@original`, {
-            method: "PATCH",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            method: 'PATCH',
+            headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 type: 4,
                 data: Object.assign({}, options)
@@ -47,8 +47,8 @@ exports.editReply = editReply;
 function deferReply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-            method: "POST",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 type: 5,
                 data: {
@@ -62,8 +62,8 @@ exports.deferReply = deferReply;
 function updateDefer(interaction, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-            method: "POST",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 type: 6
             })
@@ -74,8 +74,8 @@ exports.updateDefer = updateDefer;
 function showModal(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-            method: "POST",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 type: 9,
                 data: Object.assign({}, options)
@@ -87,8 +87,8 @@ exports.showModal = showModal;
 function autocompleteResult(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-            method: "POST",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 type: 8,
                 data: Object.assign({}, options)
@@ -99,11 +99,11 @@ function autocompleteResult(interaction, options, token) {
 exports.autocompleteResult = autocompleteResult;
 function followUp(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
-        let id = (token || process.env.TOKEN).split(".")[0];
+        let id = (token || process.env.TOKEN).split('.')[0];
         id = atob(id);
         yield fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}`, {
-            method: "POST",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.assign({}, options))
         });
     });
@@ -111,20 +111,20 @@ function followUp(interaction, options, token) {
 exports.followUp = followUp;
 function editFollowup(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
-        let id = (token || process.env.TOKEN).split(".")[0];
+        let id = (token || process.env.TOKEN).split('.')[0];
         id = atob(id);
         yield fetch(`https://discord.com/api/v10/webhooks/${id}/${interaction.token}/messages/${interaction.message.id}`, {
-            method: "PATCH",
-            headers: { "Authorization": `Bot ${token || process.env.TOKEN}`, "Content-Type": "application/json" },
+            method: 'PATCH',
+            headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.assign({}, options))
         });
     });
 }
 exports.editFollowup = editFollowup;
 function get(interaction, value) {
-    let hasOptions = interaction.data.hasOwnProperty("options");
+    const hasOptions = interaction.data.hasOwnProperty('options');
     if (hasOptions == true) {
-        let options = interaction.data.options;
+        const options = interaction.data.options;
         for (let i = 0; i < options.length; i++) {
             if (interaction.data.options[i].name == value) {
                 return interaction.data.options[i].value;
@@ -132,9 +132,9 @@ function get(interaction, value) {
         }
     }
     else {
-        let hasComponents = interaction.data.hasOwnProperty("components");
+        const hasComponents = interaction.data.hasOwnProperty('components');
         if (hasComponents == true) {
-            let components = interaction.data.components;
+            const components = interaction.data.components;
             for (let i = 0; i < components.length; i++) {
                 if (interaction.data.components[i].components[0].custom_id == value) {
                     return interaction.data.components[i].components[0].value;

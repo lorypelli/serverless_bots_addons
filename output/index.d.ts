@@ -1,4 +1,4 @@
-import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionType } from "discord-interactions";
+import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionType } from 'discord-interactions';
 export declare function reply(interaction: Interaction, options: InteractionOptions, token?: string): Promise<void>;
 export declare function editReply(interaction: Interaction, options: InteractionEditOptions, token?: string): Promise<void>;
 export declare function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;
@@ -70,37 +70,37 @@ export interface ApplicationCommandOptions {
     autocomplete?: boolean;
 }
 export interface LocalizationObject {
-    "id"?: string;
-    "da"?: string;
-    "de"?: string;
-    "en-GB"?: string;
-    "en-US"?: string;
-    "es-ES"?: string;
-    "fr"?: string;
-    "hr"?: string;
-    "it"?: string;
-    "lt"?: string;
-    "hu"?: string;
-    "nl"?: string;
-    "no"?: string;
-    "pl"?: string;
-    "pt-BR"?: string;
-    "ro"?: string;
-    "fi"?: string;
-    "sv-SE"?: string;
-    "vi"?: string;
-    "tr"?: string;
-    "cs"?: string;
-    "el"?: string;
-    "bg"?: string;
-    "ru"?: string;
-    "uk"?: string;
-    "hi"?: string;
-    "th"?: string;
-    "zh-CN"?: string;
-    "ja"?: string;
-    "zh-TW"?: string;
-    "ko"?: string;
+    'id'?: string;
+    'da'?: string;
+    'de'?: string;
+    'en-GB'?: string;
+    'en-US'?: string;
+    'es-ES'?: string;
+    'fr'?: string;
+    'hr'?: string;
+    'it'?: string;
+    'lt'?: string;
+    'hu'?: string;
+    'nl'?: string;
+    'no'?: string;
+    'pl'?: string;
+    'pt-BR'?: string;
+    'ro'?: string;
+    'fi'?: string;
+    'sv-SE'?: string;
+    'vi'?: string;
+    'tr'?: string;
+    'cs'?: string;
+    'el'?: string;
+    'bg'?: string;
+    'ru'?: string;
+    'uk'?: string;
+    'hi'?: string;
+    'th'?: string;
+    'zh-CN'?: string;
+    'ja'?: string;
+    'zh-TW'?: string;
+    'ko'?: string;
 }
 export interface Interaction {
     app_permissions: string;
@@ -113,8 +113,8 @@ export interface Interaction {
         name: string;
         resolved?: Resolved;
         target_id?: string;
-        options?: Data["options"];
-        components?: Data["components"];
+        options?: Data['options'];
+        components?: Data['components'];
         custom_id?: string;
         component_type: number;
         values: [
@@ -142,34 +142,34 @@ export interface Interaction {
 }
 interface Resolved {
     messages?: {
-        [T in Interaction["data"] extends {
+        [T in Interaction['data'] extends {
             target_id: string;
-        } ? Interaction["data"]["target_id"] : string]: Message;
+        } ? Interaction['data']['target_id'] : string]: Message;
     };
     users?: {
-        [T in Interaction["data"] extends {
+        [T in Interaction['data'] extends {
             target_id: string;
-        } ? Interaction["data"]["target_id"] : string]: User;
+        } ? Interaction['data']['target_id'] : string]: User;
     };
     members?: {
-        [T in Interaction["data"] extends {
+        [T in Interaction['data'] extends {
             target_id: string;
-        } ? Interaction["data"]["target_id"] : string]: Member;
+        } ? Interaction['data']['target_id'] : string]: Member;
     };
     roles?: {
-        [T in Interaction["data"] extends {
+        [T in Interaction['data'] extends {
             target_id: string;
-        } ? Interaction["data"]["target_id"] : string]: Roles;
+        } ? Interaction['data']['target_id'] : string]: Roles;
     };
     channels?: {
-        [T in Interaction["data"] extends {
+        [T in Interaction['data'] extends {
             target_id: string;
-        } ? Interaction["data"]["target_id"] : string]: Channel;
+        } ? Interaction['data']['target_id'] : string]: Channel;
     };
     attachments?: {
-        [T in Interaction["data"] extends {
+        [T in Interaction['data'] extends {
             target_id: string;
-        } ? Interaction["data"]["target_id"] : string]: Attachments;
+        } ? Interaction['data']['target_id'] : string]: Attachments;
     };
 }
 export interface Message {
