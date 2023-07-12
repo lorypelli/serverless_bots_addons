@@ -1,5 +1,4 @@
 /* eslint-disable no-prototype-builtins */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionType } from 'discord-interactions';
 export async function reply(interaction: Interaction, options: InteractionOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
@@ -234,8 +233,6 @@ export interface Interaction {
         ]
         type: ApplicationCommandTypes
     },
-    entitlement_sku_ids: any[],
-    entitlements: any[],
     guild: {
         features: string[],
         id: string,
@@ -451,7 +448,6 @@ export interface Member {
     permissions?: string,
     premium_since?: string | null,
     roles: string[],
-    unusual_dm_activity_until: any | null
     user: User,
 }
 export interface Roles {
@@ -479,7 +475,6 @@ export interface User {
     username: string,
     discriminator: string,
     avatar: string | null,
-    avatar_decoration: any | null
     bot?: boolean,
     system?: boolean,
     mfa_enabled?: boolean,

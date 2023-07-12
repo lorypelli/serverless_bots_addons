@@ -122,8 +122,6 @@ export interface Interaction {
         ];
         type: ApplicationCommandTypes;
     };
-    entitlement_sku_ids: any[];
-    entitlements: any[];
     guild: {
         features: string[];
         id: string;
@@ -351,7 +349,6 @@ export interface Member {
     permissions?: string;
     premium_since?: string | null;
     roles: string[];
-    unusual_dm_activity_until: any | null;
     user: User;
 }
 export interface Roles {
@@ -379,7 +376,6 @@ export interface User {
     username: string;
     discriminator: string;
     avatar: string | null;
-    avatar_decoration: any | null;
     bot?: boolean;
     system?: boolean;
     mfa_enabled?: boolean;
