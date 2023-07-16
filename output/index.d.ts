@@ -388,11 +388,58 @@ export interface User {
     premium_type?: PremiumType;
     public_flags?: number;
 }
+export interface Guild {
+    id: string;
+    name: string;
+    icon: string | null;
+    icon_hash?: string | null;
+    splash: string | null;
+    discovery_splash: string | null;
+    owner?: boolean;
+    owner_id: string;
+    permissions?: string;
+    region?: string | null;
+    afk_channel_id: string | null;
+    afk_timeout: number;
+    widget_enabled?: boolean;
+    widget_channel_id?: string | null;
+    verification_level: number;
+    default_message_notifications: number;
+    explicit_content_filter: number;
+    roles: Roles;
+    emojis: Emoji;
+    features: string[];
+    mfa_level: number;
+    application_id: string | null;
+    system_channel_id: string | null;
+    system_channel_flags: number;
+    rules_channel_id: string | null;
+    max_presences?: number | null;
+    vanity_url_code: string | null;
+    description: string | null;
+    banner: string | null;
+    premium_tier: GuildPremiumTier;
+    premium_subscription_count?: number;
+    preferred_locate: string;
+    nsfw_level: NSFW_Level;
+}
 interface PremiumType {
     NONE: 0;
     NITRO_CLASSIC: 1;
     NITRO: 2;
     NITRO_BASIC: 3;
+}
+interface GuildPremiumTier {
+    NONE: 0;
+    TIER_1: 1;
+    TIER_2: 2;
+    TIER_3: 3;
+}
+interface NSFW_Level {
+    DEFAULT: 0;
+    EXPLICIT: 1;
+    SAFE: 2;
+    AGE_RESTRICTED: 3;
 }
 interface Data {
     options?: {
