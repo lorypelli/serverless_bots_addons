@@ -47,7 +47,7 @@ export declare function login(request: any, publicKey?: string): Promise<{
 export declare function reply(interaction: Interaction, options: InteractionOptions, token?: string): Promise<void>;
 export declare function editReply(interaction: Interaction, options: InteractionEditOptions, token?: string): Promise<void>;
 export declare function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;
-export declare function updateDefer(interaction: Interaction, token?: string): Promise<void>;
+export declare function deferUpdate(interaction: Interaction, token?: string): Promise<void>;
 export declare function showModal(interaction: Interaction, options: ModalOptions, token?: string): Promise<void>;
 export declare function autocompleteResult(interaction: Interaction, options: AutocompleteOptions, token?: string): Promise<void>;
 export declare function followUp(interaction: Interaction, options: FollowupOptions, token?: string): Promise<void>;

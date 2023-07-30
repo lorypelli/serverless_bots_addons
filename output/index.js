@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followUp = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = exports.editReply = exports.reply = exports.login = void 0;
+exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followUp = exports.autocompleteResult = exports.showModal = exports.deferUpdate = exports.deferReply = exports.editReply = exports.reply = exports.login = void 0;
 /* eslint-disable no-prototype-builtins */
 const discord_interactions_1 = require("discord-interactions");
 const raw_body_1 = __importDefault(require("raw-body"));
@@ -93,7 +93,7 @@ function deferReply(interaction, options, token) {
     });
 }
 exports.deferReply = deferReply;
-function updateDefer(interaction, token) {
+function deferUpdate(interaction, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
             method: 'POST',
@@ -104,7 +104,7 @@ function updateDefer(interaction, token) {
         });
     });
 }
-exports.updateDefer = updateDefer;
+exports.deferUpdate = deferUpdate;
 function showModal(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {

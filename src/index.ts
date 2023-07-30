@@ -78,7 +78,7 @@ export async function deferReply(interaction: Interaction, options: InteractionD
         })
     });
 }
-export async function updateDefer(interaction: Interaction, token?: string) {
+export async function deferUpdate(interaction: Interaction, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
         method: 'POST',
         headers: { 'Authorization': `Bot ${token || process.env.TOKEN}`, 'Content-Type': 'application/json' },
