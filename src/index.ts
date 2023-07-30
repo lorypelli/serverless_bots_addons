@@ -3,7 +3,7 @@ import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionTyp
 import getRawBody from 'raw-body';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function login(request: any, publicKey?: string) {
-    if (typeof request as unknown === Request) {
+    if (request instanceof Request) {
         const signature: string | string[] = request.headers.get('x-signature-ed25519')!;
         const timestamp: string | string[] = request.headers.get('x-signature-timestamp')!;
         const body: ArrayBuffer = await request.clone().arrayBuffer();

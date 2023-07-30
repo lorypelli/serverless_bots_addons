@@ -19,7 +19,7 @@ const raw_body_1 = __importDefault(require("raw-body"));
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function login(request, publicKey) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (typeof request === Request) {
+        if (request instanceof Request) {
             const signature = request.headers.get('x-signature-ed25519');
             const timestamp = request.headers.get('x-signature-timestamp');
             const body = yield request.clone().arrayBuffer();
