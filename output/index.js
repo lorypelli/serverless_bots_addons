@@ -19,15 +19,28 @@ const raw_body_1 = __importDefault(require("raw-body"));
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function login(request, publicKey) {
     return __awaiter(this, void 0, void 0, function* () {
-        const signature = request.headers['x-signature-ed25519'];
-        const timestamp = request.headers['x-signature-timestamp'];
-        const body = yield (0, raw_body_1.default)(request);
-        const isValidRequest = (0, discord_interactions_1.verifyKey)(body, signature, timestamp, publicKey || process.env.PUBLIC_KEY);
-        const interaction = request.body;
-        if (!isValidRequest) {
-            return Object.assign({ status: 401 }, interaction);
+        if (typeof request === Request) {
+            const signature = request.headers.get('x-signature-ed25519');
+            const timestamp = request.headers.get('x-signature-timestamp');
+            const body = yield request.clone().arrayBuffer();
+            const isValidRequest = (0, discord_interactions_1.verifyKey)(body, signature, timestamp, publicKey || process.env.PUBLIC_KEY);
+            const interaction = request.json();
+            if (!isValidRequest) {
+                return Object.assign({ status: 401 }, interaction);
+            }
+            return Object.assign({ status: 200 }, interaction);
         }
-        return Object.assign({ status: 200 }, interaction);
+        else {
+            const signature = request.headers['x-signature-ed25519'];
+            const timestamp = request.headers['x-signature-timestamp'];
+            const body = yield (0, raw_body_1.default)(request);
+            const isValidRequest = (0, discord_interactions_1.verifyKey)(body, signature, timestamp, publicKey || process.env.PUBLIC_KEY);
+            const interaction = request.body;
+            if (!isValidRequest) {
+                return Object.assign({ status: 401 }, interaction);
+            }
+            return Object.assign({ status: 200 }, interaction);
+        }
     });
 }
 exports.login = login;

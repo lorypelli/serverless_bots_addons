@@ -3,20 +3,38 @@ import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionTyp
 import getRawBody from 'raw-body';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function login(request: any, publicKey?: string) {
-    const signature: string | string[] = request.headers['x-signature-ed25519']!;
-    const timestamp: string | string[] = request.headers['x-signature-timestamp']!;
-    const body: Buffer = await getRawBody(request);
-    const isValidRequest: boolean = verifyKey(
-        body,
-        signature as string,
-        timestamp as string,
-        publicKey || process.env.PUBLIC_KEY!
-    );
-    const interaction: Interaction = request.body as Interaction;
-    if (!isValidRequest) {
-        return { status: 401, ...interaction };
+    if (typeof request as unknown === Request) {
+        const signature: string | string[] = request.headers.get('x-signature-ed25519')!;
+        const timestamp: string | string[] = request.headers.get('x-signature-timestamp')!;
+        const body: ArrayBuffer = await request.clone().arrayBuffer();
+        const isValidRequest: boolean = verifyKey(
+            body,
+            signature as string,
+            timestamp as string,
+            publicKey || process.env.PUBLIC_KEY!
+        );
+        const interaction: Interaction = request.json() as unknown as Interaction;
+        if (!isValidRequest) {
+            return { status: 401, ...interaction };
+        }
+        return { status: 200, ...interaction };
     }
-    return { status: 200, ...interaction };
+    else {
+        const signature: string | string[] = request.headers['x-signature-ed25519']!;
+        const timestamp: string | string[] = request.headers['x-signature-timestamp']!;
+        const body: Buffer = await getRawBody(request);
+        const isValidRequest: boolean = verifyKey(
+            body,
+            signature as string,
+            timestamp as string,
+            publicKey || process.env.PUBLIC_KEY!
+        );
+        const interaction: Interaction = request.body as Interaction;
+        if (!isValidRequest) {
+            return { status: 401, ...interaction };
+        }
+        return { status: 200, ...interaction };
+    }
 }
 export async function reply(interaction: Interaction, options: InteractionOptions, token?: string) {
     await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
