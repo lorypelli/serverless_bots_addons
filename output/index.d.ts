@@ -86,6 +86,53 @@ export declare enum ChannelTypes {
     GUILD_FORUM = 15,
     GUILD_MEDIA = 16
 }
+export declare enum Permissions {
+    CREATE_INSTANT_INVITE = 1,
+    KICK_MEMBERS = 2,
+    BAN_MEMBERS = 4,
+    ADMINISTRATOR = 8,
+    MANAGE_CHANNELS = 16,
+    MANAGE_GUILD = 32,
+    ADD_REACTIONS = 64,
+    VIEW_AUDIT_LOG = 128,
+    PRIORITY_SPEAKER = 256,
+    STREAM = 512,
+    VIEW_CHANNEL = 1024,
+    SEND_MESSAGES = 2048,
+    SEND_TTS_MESSAGES = 4096,
+    MANAGE_MESSAGES = 8192,
+    EMBED_LINKS = 16384,
+    ATTACH_FILES = 32768,
+    READ_MESSAGE_HISTORY = 65536,
+    MENTION_EVERYONE = 131072,
+    USE_EXTERNAL_EMOJIS = 262144,
+    VIEW_GUILD_INSIGHTS = 524288,
+    CONNECT = 1048576,
+    SPEAK = 2097152,
+    MUTE_MEMBERS = 4194304,
+    DEAFEN_MEMBERS = 8388608,
+    MOVE_MEMBERS = 16777216,
+    USE_VAD = 33554432,
+    CHANGE_NICKNAME = 67108864,
+    MANAGE_NICKNAMES = 134217728,
+    MANAGE_ROLES = 268435456,
+    MANAGE_WEBHOOKS = 536870912,
+    MANAGE_GUILD_EXPRESSIONS = 1073741824,
+    USE_APPLICATION_COMMANDS = -2147483648,
+    REQUEST_TO_SPEAK = 1,
+    MANAGE_EVENTS = 2,
+    MANAGE_THREADS = 4,
+    CREATE_PUBLIC_THREADS = 8,
+    CREATE_PRIVATE_THREADS = 16,
+    USE_EXTERNAL_STICKERS = 32,
+    SEND_MESSAGES_IN_THREADS = 64,
+    USE_EMBEDDED_ACTIVITIES = 128,
+    MODERATE_MEMBERS = 256,
+    VIEW_CREATOR_MONETIZATION_ANALYTICS = 512,
+    USE_SOUNDBOARD = 1024,
+    USE_EXTERNAL_SOUNDS = 8192,
+    SEND_VOICE_MESSAGES = 16384
+}
 export interface SlashCommandsStructure {
     type?: ApplicationCommandTypes;
     guild_id?: string;
@@ -95,7 +142,7 @@ export interface SlashCommandsStructure {
     description_localizations?: LocalizationObject | null;
     options?: ApplicationCommandOptions[];
     dm_permission?: boolean;
-    default_permission?: boolean | null;
+    default_member_permissions: string | null;
     nsfw?: boolean;
 }
 export interface ApplicationCommandOptions {
