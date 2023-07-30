@@ -8,8 +8,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followUp = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = exports.editReply = exports.reply = void 0;
+exports.ChannelTypes = exports.ApplicationCommandOptionTypes = exports.ApplicationCommandTypes = exports.get = exports.editFollowup = exports.followUp = exports.autocompleteResult = exports.showModal = exports.updateDefer = exports.deferReply = exports.editReply = exports.reply = exports.login = void 0;
+/* eslint-disable no-prototype-builtins */
+const discord_interactions_1 = require("discord-interactions");
+const raw_body_1 = __importDefault(require("raw-body"));
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function login(request, publicKey) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const signature = request.headers['x-signature-ed25519'];
+        const timestamp = request.headers['x-signature-timestamp'];
+        const body = yield (0, raw_body_1.default)(request);
+        const isValidRequest = (0, discord_interactions_1.verifyKey)(body, signature, timestamp, publicKey || process.env.PUBLIC_KEY);
+        const interaction = request.body;
+        if (!isValidRequest) {
+            return Object.assign({ status: 401 }, interaction);
+        }
+        return Object.assign({ status: 200 }, interaction);
+    });
+}
+exports.login = login;
 function reply(interaction, options, token) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {

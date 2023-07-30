@@ -1,4 +1,49 @@
 import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionType } from 'discord-interactions';
+export declare function login(request: any, publicKey?: string): Promise<{
+    app_permissions: string;
+    application_id: string;
+    channel: Channel;
+    channel_id: string;
+    data?: {
+        guild_id: string;
+        id: string;
+        name: string;
+        resolved?: Resolved | undefined;
+        target_id?: string | undefined;
+        options?: {
+            name: string;
+            type: number;
+            value: string;
+        }[] | undefined;
+        components?: {
+            components: {
+                custom_id: string;
+                type: number;
+                value: string;
+            }[];
+        }[] | undefined;
+        custom_id?: string | undefined;
+        component_type: number;
+        values: [label: string];
+        type: ApplicationCommandTypes;
+    } | undefined;
+    guild: {
+        features: string[];
+        id: string;
+        locale: string;
+    };
+    guild_id?: string | undefined;
+    guild_locale?: string | undefined;
+    id: string;
+    locale?: string | undefined;
+    member?: Member | undefined;
+    user?: User | undefined;
+    token: string;
+    type: InteractionType;
+    version: 1;
+    message: Message;
+    status: number;
+}>;
 export declare function reply(interaction: Interaction, options: InteractionOptions, token?: string): Promise<void>;
 export declare function editReply(interaction: Interaction, options: InteractionEditOptions, token?: string): Promise<void>;
 export declare function deferReply(interaction: Interaction, options: InteractionDeferredOptions, token?: string): Promise<void>;

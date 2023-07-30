@@ -1,6 +1,6 @@
 {
   "name": "serverless_bots_addons",
-  "version": "5.3.5-20230716",
+  "version": "5.4.2-20230730",
   "description": "A package to improve serverless discord bots",
   "main": "./output/index.js",
   "types": "./output/index.d.ts",
@@ -28,6 +28,7 @@
     "url": "https://github.com/lorypelli/serverless_bots_addons"
   },
   "dependencies": {
-    "discord-interactions": "^3.4.0"
+    "discord-interactions": "^3.4.0",
+    "raw-body": "^2.5.2"
   }
 }
