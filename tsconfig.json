@@ -1,12 +1,16 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "target": "ES2015",
-      "outDir": "output",
-      "declaration": true,
-      "strict": true,
-      "esModuleInterop": true
-    },
-    "include": ["src"],
-    "exclude": ["node_modules"]
-  }
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2015",
+    "outDir": "dist",
+    "declaration": true,
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
