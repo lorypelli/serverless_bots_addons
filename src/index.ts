@@ -1,8 +1,9 @@
 /* eslint-disable no-prototype-builtins */
 import { MessageComponentTypes, ButtonStyleTypes, TextStyleTypes, InteractionType, verifyKey } from 'discord-interactions';
+import { IncomingMessage } from 'http';
 import getRawBody from 'raw-body';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function login(request: any, publicKey?: string) {
+export async function login(request: Request | IncomingMessage & { body: any }, publicKey?: string) {
     if (request instanceof Request) {
         const signature: string | string[] = request.headers.get('x-signature-ed25519')!;
         const timestamp: string | string[] = request.headers.get('x-signature-timestamp')!;
