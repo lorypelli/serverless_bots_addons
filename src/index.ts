@@ -8,13 +8,13 @@ export async function login(request: Request | IncomingMessage & { body: any }, 
         const signature: string | string[] = request.headers.get('x-signature-ed25519')!;
         const timestamp: string | string[] = request.headers.get('x-signature-timestamp')!;
         const body: ArrayBuffer = await request.clone().arrayBuffer();
-        const isValidRequest: boolean = verifyKey(
+        const isValidRequest = verifyKey(
             body,
             signature as string,
             timestamp as string,
             publicKey || process.env.PUBLIC_KEY!
         );
-        const interaction: Interaction = request.json() as unknown as Interaction;
+        const interaction = request.json() as unknown as Interaction;
         if (!isValidRequest) {
             return { status: 401, ...interaction };
         }
@@ -24,13 +24,13 @@ export async function login(request: Request | IncomingMessage & { body: any }, 
         const signature: string | string[] = request.headers['x-signature-ed25519']!;
         const timestamp: string | string[] = request.headers['x-signature-timestamp']!;
         const body: Buffer = await getRawBody(request);
-        const isValidRequest: boolean = verifyKey(
+        const isValidRequest = verifyKey(
             body,
             signature as string,
             timestamp as string,
             publicKey || process.env.PUBLIC_KEY!
         );
-        const interaction: Interaction = request.body as Interaction;
+        const interaction = request.body as Interaction;
         if (!isValidRequest) {
             return { status: 401, ...interaction };
         }
